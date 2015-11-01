@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+        http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
+	version="1.0">
+
+	<!-- A JPA Persistence Unit -->
+	<persistence-unit name="epicam"
+		transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<!-- JPA entities must be registered here -->
+		<class>org.imogene.lib.common.binary.file.BinaryFile</class>
+		<class>org.imogene.lib.common.dynamicfields.DynamicFieldTemplate</class>
+		<class>org.imogene.lib.common.dynamicfields.DynamicFieldInstance</class>
+		<class>org.imogene.lib.common.filter.ClientFilter</class>
+		<class>org.imogene.lib.common.model.CardEntity</class>
+		<class>org.imogene.lib.common.model.FieldGroup</class>
+		<class>org.imogene.lib.common.notification.Notification</class>
+		<class>org.imogene.lib.common.profile.EntityProfile</class>
+		<class>org.imogene.lib.common.profile.FieldGroupProfile</class>
+		<class>org.imogene.lib.common.profile.Profile</class>
+		<class>org.imogene.lib.common.user.DefaultUser</class>
+		<class>org.imogene.lib.common.useraction.UserAction</class>
+		<class>org.imogene.lib.sync.history.SyncHistory</class>
+		<class>org.imogene.lib.sync.session.SyncSession</class>
+		<class>org.imogene.lib.push.domain.Connection</class>
+		<class>org.imogene.lib.push.domain.Message</class>
+		<class>org.imogene.epicam.domain.entity.Patient</class>
+		<class>org.imogene.epicam.domain.entity.CasIndex</class>
+		<class>org.imogene.epicam.domain.entity.CasTuberculose</class>
+		<class>org.imogene.epicam.domain.entity.ExamenSerologie</class>
+		<class>org.imogene.epicam.domain.entity.ExamenBiologique</class>
+		<class>org.imogene.epicam.domain.entity.ExamenMicroscopie</class>
+		<class>org.imogene.epicam.domain.entity.ExamenATB</class>
+		<class>org.imogene.epicam.domain.entity.PriseMedicamenteuse</class>
+		<class>org.imogene.epicam.domain.entity.RendezVous</class>
+		<class>org.imogene.epicam.domain.entity.TransfertReference</class>
+		<class>org.imogene.epicam.domain.entity.Lot</class>
+		<class>org.imogene.epicam.domain.entity.HorsUsage</class>
+		<class>org.imogene.epicam.domain.entity.EntreeLot</class>
+		<class>org.imogene.epicam.domain.entity.SortieLot</class>
+		<class>org.imogene.epicam.domain.entity.Commande</class>
+		<class>org.imogene.epicam.domain.entity.DetailCommandeMedicament</class>
+		<class>org.imogene.epicam.domain.entity.DetailCommandeIntrant</class>
+		<class>org.imogene.epicam.domain.entity.Reception</class>
+		<class>org.imogene.epicam.domain.entity.DetailReceptionMedicament</class>
+		<class>org.imogene.epicam.domain.entity.DetailReceptionIntrant</class>
+		<class>org.imogene.epicam.domain.entity.Ravitaillement</class>
+		<class>org.imogene.epicam.domain.entity.DetailRavitaillement</class>
+		<class>org.imogene.epicam.domain.entity.Inventaire</class>
+		<class>org.imogene.epicam.domain.entity.DetailInventaire</class>
+		<class>org.imogene.epicam.domain.entity.Personnel</class>
+		<class>org.imogene.epicam.domain.entity.DepartPersonnel</class>
+		<class>org.imogene.epicam.domain.entity.ArriveePersonnel</class>
+		<class>org.imogene.epicam.domain.entity.Region</class>
+		<class>org.imogene.epicam.domain.entity.DistrictSante</class>
+		<class>org.imogene.epicam.domain.entity.CentreDiagTrait</class>
+		<class>org.imogene.epicam.domain.entity.LaboratoireReference</class>
+		<class>org.imogene.epicam.domain.entity.LieuDit</class>
+		<class>org.imogene.epicam.domain.entity.Regime</class>
+		<class>org.imogene.epicam.domain.entity.PriseMedicamentRegime</class>
+		<class>org.imogene.epicam.domain.entity.Medicament</class>
+		<class>org.imogene.epicam.domain.entity.Intrant</class>
+		<class>org.imogene.epicam.domain.entity.Formation</class>
+		<class>org.imogene.epicam.domain.entity.CandidatureFormation</class>
+		<class>org.imogene.epicam.domain.entity.Qualification</class>
+		<class>org.imogene.epicam.domain.entity.Tutoriel</class>
+		<class>org.imogene.epicam.domain.entity.SmsPredefini</class>
+		<class>org.imogene.epicam.domain.entity.OutBox</class>
+		<class>org.imogene.epicam.domain.entity.Utilisateur</class>
+	</persistence-unit>
+</persistence>

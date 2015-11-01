@@ -1,0 +1,493 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="
+     http://www.springframework.org/schema/beans 
+     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<!-- notification for the creation or the modification of bean -->
+	<bean id="notifyAfterSave" class="org.imogene.notif.aop.NotificationSaveInterceptor">
+		<property name="notifierUrl" value="${notifier.server}" />
+		<property name="dao" ref="genericDao" />
+		<property name="cloneFactory" ref="cloneFactory" />		
+	</bean>
+	
+  	<bean id="cloneFactory" class="org.imogene.epicam.domain.entity.backup.CloneFactoryImpl" factory-method="getInstance"/>
+
+
+	
+	<!-- proxy Implementation Class -->
+	<bean id="patientDao" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>org.imogene.epicam.domain.dao.PatientDao</value>
+		</property>
+		<property name="interceptorNames">
+			<list><value>notifyAfterSave</value></list>
+		</property>
+		<property name="target"><ref bean="patientDaoBase" /></property>
+	</bean>
+	
+	<!-- proxy Implementation Class -->
+	<bean id="casIndexDao" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>org.imogene.epicam.domain.dao.CasIndexDao</value>
+		</property>
+		<property name="interceptorNames">
+			<list><value>notifyAfterSave</value></list>
+		</property>
+		<property name="target"><ref bean="casIndexDaoBase" /></property>
+	</bean>
+	
+	<!-- proxy Implementation Class -->
+	<bean id="casTuberculoseDao" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>org.imogene.epicam.domain.dao.CasTuberculoseDao</value>
+		</property>
+		<property name="interceptorNames">
+			<list><value>notifyAfterSave</value></list>
+		</property>
+		<property name="target"><ref bean="casTuberculoseDaoBase" /></property>
+	</bean>
+	
+	<!-- proxy Implementation Class -->
+	<bean id="examenSerologieDao" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>org.imogene.epicam.domain.dao.ExamenSerologieDao</value>
+		</property>
+		<property name="interceptorNames">
+			<list><value>notifyAfterSave</value></list>
+		</property>
+		<property name="target"><ref bean="examenSerologieDaoBase" /></property>
+	</bean>
+	
+	<!-- proxy Implementation Class -->
+	<bean id="examenBiologiqueDao" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>org.imogene.epicam.domain.dao.ExamenBiologiqueDao</value>
+		</property>
+		<property name="interceptorNames">
+			<list><value>notifyAfterSave</value></list>
+		</property>
+		<property name="target"><ref bean="examenBiologiqueDaoBase" /></property>
+	</bean>
+	
+	<!-- proxy Implementation Class -->
+	<bean id="examenMicroscopieDao" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>org.imogene.epicam.domain.dao.ExamenMicroscopieDao</value>
+		</property>
+		<property name="interceptorNames">
+			<list><value>notifyAfterSave</value></list>
+		</property>
+		<property name="target"><ref bean="examenMicroscopieDaoBase" /></property>
+	</bean>
+	
+	<!-- proxy Implementation Class -->
+	<bean id="examenATBDao" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>org.imogene.epicam.domain.dao.ExamenATBDao</value>
+		</property>
+		<property name="interceptorNames">
+			<list><value>notifyAfterSave</value></list>
+		</property>
+		<property name="target"><ref bean="examenATBDaoBase" /></property>
+	</bean>
+	
+	<!-- proxy Implementation Class -->
+	<bean id="priseMedicamenteuseDao" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>org.imogene.epicam.domain.dao.PriseMedicamenteuseDao</value>
+		</property>
+		<property name="interceptorNames">
+			<list><value>notifyAfterSave</value></list>
+		</property>
+		<property name="target"><ref bean="priseMedicamenteuseDaoBase" /></property>
+	</bean>
+	
+	<!-- proxy Implementation Class -->
+	<bean id="rendezVousDao" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>org.imogene.epicam.domain.dao.RendezVousDao</value>
+		</property>
+		<property name="interceptorNames">
+			<list><value>notifyAfterSave</value></list>
+		</property>
+		<property name="target"><ref bean="rendezVousDaoBase" /></property>
+	</bean>
+	
+	<!-- proxy Implementation Class -->
+	<bean id="transfertReferenceDao" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>org.imogene.epicam.domain.dao.TransfertReferenceDao</value>
+		</property>
+		<property name="interceptorNames">
+			<list><value>notifyAfterSave</value></list>
+		</property>
+		<property name="target"><ref bean="transfertReferenceDaoBase" /></property>
+	</bean>
+	
+	<!-- proxy Implementation Class -->
+	<bean id="lotDao" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>org.imogene.epicam.domain.dao.LotDao</value>
+		</property>
+		<property name="interceptorNames">
+			<list><value>notifyAfterSave</value></list>
+		</property>
+		<property name="target"><ref bean="lotDaoBase" /></property>
+	</bean>
+	
+	<!-- proxy Implementation Class -->
+	<bean id="horsUsageDao" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>org.imogene.epicam.domain.dao.HorsUsageDao</value>
+		</property>
+		<property name="interceptorNames">
+			<list><value>notifyAfterSave</value></list>
+		</property>
+		<property name="target"><ref bean="horsUsageDaoBase" /></property>
+	</bean>
+	
+	<!-- proxy Implementation Class -->
+	<bean id="entreeLotDao" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>org.imogene.epicam.domain.dao.EntreeLotDao</value>
+		</property>
+		<property name="interceptorNames">
+			<list><value>notifyAfterSave</value></list>
+		</property>
+		<property name="target"><ref bean="entreeLotDaoBase" /></property>
+	</bean>
+	
+	<!-- proxy Implementation Class -->
+	<bean id="sortieLotDao" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>org.imogene.epicam.domain.dao.SortieLotDao</value>
+		</property>
+		<property name="interceptorNames">
+			<list><value>notifyAfterSave</value></list>
+		</property>
+		<property name="target"><ref bean="sortieLotDaoBase" /></property>
+	</bean>
+	
+	<!-- proxy Implementation Class -->
+	<bean id="commandeDao" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>org.imogene.epicam.domain.dao.CommandeDao</value>
+		</property>
+		<property name="interceptorNames">
+			<list><value>notifyAfterSave</value></list>
+		</property>
+		<property name="target"><ref bean="commandeDaoBase" /></property>
+	</bean>
+	
+	<!-- proxy Implementation Class -->
+	<bean id="detailCommandeMedicamentDao" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>org.imogene.epicam.domain.dao.DetailCommandeMedicamentDao</value>
+		</property>
+		<property name="interceptorNames">
+			<list><value>notifyAfterSave</value></list>
+		</property>
+		<property name="target"><ref bean="detailCommandeMedicamentDaoBase" /></property>
+	</bean>
+	
+	<!-- proxy Implementation Class -->
+	<bean id="detailCommandeIntrantDao" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>org.imogene.epicam.domain.dao.DetailCommandeIntrantDao</value>
+		</property>
+		<property name="interceptorNames">
+			<list><value>notifyAfterSave</value></list>
+		</property>
+		<property name="target"><ref bean="detailCommandeIntrantDaoBase" /></property>
+	</bean>
+	
+	<!-- proxy Implementation Class -->
+	<bean id="receptionDao" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>org.imogene.epicam.domain.dao.ReceptionDao</value>
+		</property>
+		<property name="interceptorNames">
+			<list><value>notifyAfterSave</value></list>
+		</property>
+		<property name="target"><ref bean="receptionDaoBase" /></property>
+	</bean>
+	
+	<!-- proxy Implementation Class -->
+	<bean id="detailReceptionMedicamentDao" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>org.imogene.epicam.domain.dao.DetailReceptionMedicamentDao</value>
+		</property>
+		<property name="interceptorNames">
+			<list><value>notifyAfterSave</value></list>
+		</property>
+		<property name="target"><ref bean="detailReceptionMedicamentDaoBase" /></property>
+	</bean>
+	
+	<!-- proxy Implementation Class -->
+	<bean id="detailReceptionIntrantDao" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>org.imogene.epicam.domain.dao.DetailReceptionIntrantDao</value>
+		</property>
+		<property name="interceptorNames">
+			<list><value>notifyAfterSave</value></list>
+		</property>
+		<property name="target"><ref bean="detailReceptionIntrantDaoBase" /></property>
+	</bean>
+	
+	<!-- proxy Implementation Class -->
+	<bean id="ravitaillementDao" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>org.imogene.epicam.domain.dao.RavitaillementDao</value>
+		</property>
+		<property name="interceptorNames">
+			<list><value>notifyAfterSave</value></list>
+		</property>
+		<property name="target"><ref bean="ravitaillementDaoBase" /></property>
+	</bean>
+	
+	<!-- proxy Implementation Class -->
+	<bean id="detailRavitaillementDao" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>org.imogene.epicam.domain.dao.DetailRavitaillementDao</value>
+		</property>
+		<property name="interceptorNames">
+			<list><value>notifyAfterSave</value></list>
+		</property>
+		<property name="target"><ref bean="detailRavitaillementDaoBase" /></property>
+	</bean>
+	
+	<!-- proxy Implementation Class -->
+	<bean id="inventaireDao" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>org.imogene.epicam.domain.dao.InventaireDao</value>
+		</property>
+		<property name="interceptorNames">
+			<list><value>notifyAfterSave</value></list>
+		</property>
+		<property name="target"><ref bean="inventaireDaoBase" /></property>
+	</bean>
+	
+	<!-- proxy Implementation Class -->
+	<bean id="detailInventaireDao" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>org.imogene.epicam.domain.dao.DetailInventaireDao</value>
+		</property>
+		<property name="interceptorNames">
+			<list><value>notifyAfterSave</value></list>
+		</property>
+		<property name="target"><ref bean="detailInventaireDaoBase" /></property>
+	</bean>
+	
+	<!-- proxy Implementation Class -->
+	<bean id="personnelDao" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>org.imogene.epicam.domain.dao.PersonnelDao</value>
+		</property>
+		<property name="interceptorNames">
+			<list><value>notifyAfterSave</value></list>
+		</property>
+		<property name="target"><ref bean="personnelDaoBase" /></property>
+	</bean>
+	
+	<!-- proxy Implementation Class -->
+	<bean id="departPersonnelDao" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>org.imogene.epicam.domain.dao.DepartPersonnelDao</value>
+		</property>
+		<property name="interceptorNames">
+			<list><value>notifyAfterSave</value></list>
+		</property>
+		<property name="target"><ref bean="departPersonnelDaoBase" /></property>
+	</bean>
+	
+	<!-- proxy Implementation Class -->
+	<bean id="arriveePersonnelDao" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>org.imogene.epicam.domain.dao.ArriveePersonnelDao</value>
+		</property>
+		<property name="interceptorNames">
+			<list><value>notifyAfterSave</value></list>
+		</property>
+		<property name="target"><ref bean="arriveePersonnelDaoBase" /></property>
+	</bean>
+	
+	<!-- proxy Implementation Class -->
+	<bean id="regionDao" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>org.imogene.epicam.domain.dao.RegionDao</value>
+		</property>
+		<property name="interceptorNames">
+			<list><value>notifyAfterSave</value></list>
+		</property>
+		<property name="target"><ref bean="regionDaoBase" /></property>
+	</bean>
+	
+	<!-- proxy Implementation Class -->
+	<bean id="districtSanteDao" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>org.imogene.epicam.domain.dao.DistrictSanteDao</value>
+		</property>
+		<property name="interceptorNames">
+			<list><value>notifyAfterSave</value></list>
+		</property>
+		<property name="target"><ref bean="districtSanteDaoBase" /></property>
+	</bean>
+	
+	<!-- proxy Implementation Class -->
+	<bean id="centreDiagTraitDao" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>org.imogene.epicam.domain.dao.CentreDiagTraitDao</value>
+		</property>
+		<property name="interceptorNames">
+			<list><value>notifyAfterSave</value></list>
+		</property>
+		<property name="target"><ref bean="centreDiagTraitDaoBase" /></property>
+	</bean>
+	
+	<!-- proxy Implementation Class -->
+	<bean id="laboratoireReferenceDao" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>org.imogene.epicam.domain.dao.LaboratoireReferenceDao</value>
+		</property>
+		<property name="interceptorNames">
+			<list><value>notifyAfterSave</value></list>
+		</property>
+		<property name="target"><ref bean="laboratoireReferenceDaoBase" /></property>
+	</bean>
+	
+	<!-- proxy Implementation Class -->
+	<bean id="lieuDitDao" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>org.imogene.epicam.domain.dao.LieuDitDao</value>
+		</property>
+		<property name="interceptorNames">
+			<list><value>notifyAfterSave</value></list>
+		</property>
+		<property name="target"><ref bean="lieuDitDaoBase" /></property>
+	</bean>
+	
+	<!-- proxy Implementation Class -->
+	<bean id="regimeDao" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>org.imogene.epicam.domain.dao.RegimeDao</value>
+		</property>
+		<property name="interceptorNames">
+			<list><value>notifyAfterSave</value></list>
+		</property>
+		<property name="target"><ref bean="regimeDaoBase" /></property>
+	</bean>
+	
+	<!-- proxy Implementation Class -->
+	<bean id="priseMedicamentRegimeDao" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>org.imogene.epicam.domain.dao.PriseMedicamentRegimeDao</value>
+		</property>
+		<property name="interceptorNames">
+			<list><value>notifyAfterSave</value></list>
+		</property>
+		<property name="target"><ref bean="priseMedicamentRegimeDaoBase" /></property>
+	</bean>
+	
+	<!-- proxy Implementation Class -->
+	<bean id="medicamentDao" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>org.imogene.epicam.domain.dao.MedicamentDao</value>
+		</property>
+		<property name="interceptorNames">
+			<list><value>notifyAfterSave</value></list>
+		</property>
+		<property name="target"><ref bean="medicamentDaoBase" /></property>
+	</bean>
+	
+	<!-- proxy Implementation Class -->
+	<bean id="intrantDao" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>org.imogene.epicam.domain.dao.IntrantDao</value>
+		</property>
+		<property name="interceptorNames">
+			<list><value>notifyAfterSave</value></list>
+		</property>
+		<property name="target"><ref bean="intrantDaoBase" /></property>
+	</bean>
+	
+	<!-- proxy Implementation Class -->
+	<bean id="formationDao" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>org.imogene.epicam.domain.dao.FormationDao</value>
+		</property>
+		<property name="interceptorNames">
+			<list><value>notifyAfterSave</value></list>
+		</property>
+		<property name="target"><ref bean="formationDaoBase" /></property>
+	</bean>
+	
+	<!-- proxy Implementation Class -->
+	<bean id="candidatureFormationDao" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>org.imogene.epicam.domain.dao.CandidatureFormationDao</value>
+		</property>
+		<property name="interceptorNames">
+			<list><value>notifyAfterSave</value></list>
+		</property>
+		<property name="target"><ref bean="candidatureFormationDaoBase" /></property>
+	</bean>
+	
+	<!-- proxy Implementation Class -->
+	<bean id="qualificationDao" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>org.imogene.epicam.domain.dao.QualificationDao</value>
+		</property>
+		<property name="interceptorNames">
+			<list><value>notifyAfterSave</value></list>
+		</property>
+		<property name="target"><ref bean="qualificationDaoBase" /></property>
+	</bean>
+	
+	<!-- proxy Implementation Class -->
+	<bean id="tutorielDao" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>org.imogene.epicam.domain.dao.TutorielDao</value>
+		</property>
+		<property name="interceptorNames">
+			<list><value>notifyAfterSave</value></list>
+		</property>
+		<property name="target"><ref bean="tutorielDaoBase" /></property>
+	</bean>
+	
+	<!-- proxy Implementation Class -->
+	<bean id="smsPredefiniDao" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>org.imogene.epicam.domain.dao.SmsPredefiniDao</value>
+		</property>
+		<property name="interceptorNames">
+			<list><value>notifyAfterSave</value></list>
+		</property>
+		<property name="target"><ref bean="smsPredefiniDaoBase" /></property>
+	</bean>
+	
+	<!-- proxy Implementation Class -->
+	<bean id="outBoxDao" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>org.imogene.epicam.domain.dao.OutBoxDao</value>
+		</property>
+		<property name="interceptorNames">
+			<list><value>notifyAfterSave</value></list>
+		</property>
+		<property name="target"><ref bean="outBoxDaoBase" /></property>
+	</bean>
+	
+	<!-- proxy Implementation Class -->
+	<bean id="utilisateurDao" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="proxyInterfaces">
+			<value>org.imogene.epicam.domain.dao.UtilisateurDao</value>
+		</property>
+		<property name="interceptorNames">
+			<list><value>notifyAfterSave</value></list>
+		</property>
+		<property name="target"><ref bean="utilisateurDaoBase" /></property>
+	</bean>
+	
+	
+</beans>

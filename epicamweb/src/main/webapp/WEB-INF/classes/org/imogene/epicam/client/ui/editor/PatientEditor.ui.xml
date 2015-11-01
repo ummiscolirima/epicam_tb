@@ -1,0 +1,229 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+	xmlns:g='urn:import:com.google.gwt.user.client.ui' 
+	xmlns:imo='urn:import:org.imogene.web.client.ui.field'
+	xmlns:imo1='urn:import:org.imogene.web.client.ui.field.relation.single'
+	xmlns:imo2='urn:import:org.imogene.web.client.ui.field.relation.multi'
+	xmlns:imo3="urn:import:org.imogene.web.client.ui.field.group"
+	xmlns:imo4="urn:import:org.imogene.web.client.ui.field.binary"
+	xmlns:imon1="urn:import:org.imogene.epicam.client.ui.editor.nested"
+	>		
+	
+
+	<ui:style>
+		.imogene-form {
+			width: 100%;
+			vertical-align: top;
+		}
+		
+		.imogene-fieldTable {
+			width: 100%;
+			border-spacing: 10px 0px;
+		}
+		
+		.imogene-field {
+			margin-left: 10px;
+		}
+		
+		@if user.agent ie6 ie8 ie9 {
+			.dependentVisibility {
+				margin-left: 20px;
+				font-style: italic;
+			}
+		}
+		@else {
+			.dependentVisibility {
+				padding-left: 20px;
+				background: url(images/arrow-18.png) no-repeat;
+				background-position: 0% 50%;	
+			}
+		}
+
+		@external .dependentVisibility;
+	</ui:style>
+
+
+	<g:VerticalPanel stylePrimaryName="{style.imogene-form}">
+	
+	
+	<!-- Identification section widgets -->
+		<imo3:FieldGroupPanel ui:field="identificationSection">
+	
+			<g:SimplePanel stylePrimaryName="{style.imogene-field}">
+				<imo:ImogTextBox ui:field="identifiant" />
+			</g:SimplePanel>
+			<g:SimplePanel stylePrimaryName="{style.imogene-field}">
+				<imo:ImogTextBox ui:field="nom" />
+			</g:SimplePanel>
+			<g:SimplePanel stylePrimaryName="{style.imogene-field}">
+				<imo:ImogSingleEnumBox ui:field="sexe" />
+			</g:SimplePanel>
+			<g:SimplePanel stylePrimaryName="{style.imogene-field}">
+				<imo:ImogDateBox ui:field="dateNaissance" />
+			</g:SimplePanel>
+			<g:SimplePanel stylePrimaryName="{style.imogene-field}">
+				<imo:ImogIntegerBox ui:field="age" />
+			</g:SimplePanel>
+			<g:SimplePanel stylePrimaryName="{style.imogene-field}">
+				<imo:ImogTextBox ui:field="profession" />
+			</g:SimplePanel>
+			<g:SimplePanel stylePrimaryName="{style.imogene-field}">
+				<imo2:ImogMultiRelationBox ui:field="centres" />
+			</g:SimplePanel>
+			<g:SimplePanel stylePrimaryName="{style.imogene-field}">
+				<imo:ImogSingleEnumBox ui:field="nationalite" />
+			</g:SimplePanel>
+			<g:SimplePanel stylePrimaryName="{style.imogene-field}">
+				<imo:ImogTextBox ui:field="precisionSurNationalite" />
+			</g:SimplePanel>
+			<g:SimplePanel stylePrimaryName="{style.imogene-field}">
+				<imo:ImogBooleanBox ui:field="recevoirCarnetTelPortable" />
+			</g:SimplePanel>
+
+		</imo3:FieldGroupPanel>	
+	
+	<!-- Contact section widgets -->
+		<imo3:FieldGroupPanel ui:field="contactSection">
+	
+			<g:SimplePanel stylePrimaryName="{style.imogene-field}">
+				<imo:ImogTextBox ui:field="telephoneUn" />
+			</g:SimplePanel>
+			<g:SimplePanel stylePrimaryName="{style.imogene-field}">
+				<imo:ImogTextBox ui:field="telephoneDeux" />
+			</g:SimplePanel>
+			<g:SimplePanel stylePrimaryName="{style.imogene-field}">
+				<imo:ImogTextBox ui:field="telephoneTrois" />
+			</g:SimplePanel>
+			<g:SimplePanel stylePrimaryName="{style.imogene-field}">
+				<imo:ImogEmailBox ui:field="email" />
+			</g:SimplePanel>
+			<g:SimplePanel stylePrimaryName="{style.imogene-field}">
+				<imo:ImogSingleEnumBox ui:field="libelle" />
+			</g:SimplePanel>
+			<g:SimplePanel stylePrimaryName="{style.imogene-field}">
+				<imo:ImogTextAreaBox ui:field="complementAdresse" />
+			</g:SimplePanel>
+			<g:SimplePanel stylePrimaryName="{style.imogene-field}">
+				<imo:ImogTextBox ui:field="quartier" />
+			</g:SimplePanel>
+			<g:SimplePanel stylePrimaryName="{style.imogene-field}">
+				<imo:ImogTextBox ui:field="ville" />
+			</g:SimplePanel>
+			<g:SimplePanel stylePrimaryName="{style.imogene-field}">
+				<imo:ImogTextBox ui:field="codePostal" />
+			</g:SimplePanel>
+			<g:SimplePanel stylePrimaryName="{style.imogene-field}">
+				<imo2:ImogMultiRelationBox ui:field="lieuxDits" />
+			</g:SimplePanel>
+
+		</imo3:FieldGroupPanel>	
+	
+	<!-- PersonneContact section widgets -->
+		<imo3:FieldGroupPanel ui:field="personneContactSection">
+	
+			<g:SimplePanel stylePrimaryName="{style.imogene-field}">
+				<imo:ImogTextBox ui:field="pacNom" />
+			</g:SimplePanel>
+			<g:SimplePanel stylePrimaryName="{style.imogene-field}">
+				<imo:ImogTextBox ui:field="pacTelephoneUn" />
+			</g:SimplePanel>
+			<g:SimplePanel stylePrimaryName="{style.imogene-field}">
+				<imo:ImogTextBox ui:field="pacTelephoneDeux" />
+			</g:SimplePanel>
+			<g:SimplePanel stylePrimaryName="{style.imogene-field}">
+				<imo:ImogTextBox ui:field="pacTelephoneTrois" />
+			</g:SimplePanel>
+			<g:SimplePanel stylePrimaryName="{style.imogene-field}">
+				<imo:ImogEmailBox ui:field="pacEmail" />
+			</g:SimplePanel>
+			<g:SimplePanel stylePrimaryName="{style.imogene-field}">
+				<imo:ImogSingleEnumBox ui:field="pacLibelle" />
+			</g:SimplePanel>
+			<g:SimplePanel stylePrimaryName="{style.imogene-field}">
+				<imo:ImogTextAreaBox ui:field="pacComplementAdresse" />
+			</g:SimplePanel>
+			<g:SimplePanel stylePrimaryName="{style.imogene-field}">
+				<imo:ImogTextBox ui:field="pacQuartier" />
+			</g:SimplePanel>
+			<g:SimplePanel stylePrimaryName="{style.imogene-field}">
+				<imo:ImogTextBox ui:field="pacVille" />
+			</g:SimplePanel>
+			<g:SimplePanel stylePrimaryName="{style.imogene-field}">
+				<imo:ImogTextBox ui:field="pacCodePostal" />
+			</g:SimplePanel>
+
+		</imo3:FieldGroupPanel>	
+	
+	<!-- Tuberculose section widgets -->
+		<imo3:FieldGroupPanel ui:field="tuberculoseSection">
+	
+			<g:SimplePanel stylePrimaryName="{style.imogene-field}">
+				<imo2:ImogMultiRelationBox ui:field="casTuberculose" />
+			</g:SimplePanel>
+			<g:SimplePanel stylePrimaryName="{style.imogene-field}">
+				<imon1:PatientCasIndexListEditor ui:field="casIndex" />
+			</g:SimplePanel>
+
+		</imo3:FieldGroupPanel>	
+	
+	<!-- Examens section widgets -->
+		<imo3:FieldGroupPanel ui:field="examensSection">
+	
+			<g:SimplePanel stylePrimaryName="{style.imogene-field}">
+				<imon1:PatientExamensBiologiquesListEditor ui:field="examensBiologiques" />
+			</g:SimplePanel>
+			<g:SimplePanel stylePrimaryName="{style.imogene-field}">
+				<imon1:PatientSerologiesListEditor ui:field="serologies" />
+			</g:SimplePanel>
+
+		</imo3:FieldGroupPanel>	
+	
+	
+		
+	
+	</g:VerticalPanel>
+	
+	
+	<!-- if table with columns -->
+	
+	<!--
+	
+			<g:Grid stylePrimaryName="{style.imogene-fieldTable}">
+				<g:row>
+					<g:customCell>
+						<imo:ImogIntegerBox ui:field="floor" />
+					</g:customCell>
+					<g:customCell>
+						<imo:ImogTimeBox ui:field="visitTime" />
+					</g:customCell>
+				</g:row>
+
+				<g:row>
+					<g:customCell>
+						<imo:ImogBooleanBox ui:field="isBooked" />
+					</g:customCell>
+					<g:customCell>
+						<imo:ImogSingleEnumBox ui:field="type" />
+					</g:customCell>
+				</g:row>
+
+				<g:row>
+					<g:customCell>
+						<imo:ImogMultiEnumBox ui:field="colors" />
+					</g:customCell>
+					<g:customCell>
+						<imo:ImogTextBox ui:field="comment" />
+					</g:customCell>
+				</g:row>
+
+				<g:row>
+					<g:customCell>
+						<imo:ImogAddressBox ui:field="address" />
+					</g:customCell>
+					<g:customCell>
+						<imo:ImogEmailBox ui:field="email" />
+					</g:customCell>
+				</g:row>
+			</g:Grid>	
+	-->		
+
+</ui:UiBinder>

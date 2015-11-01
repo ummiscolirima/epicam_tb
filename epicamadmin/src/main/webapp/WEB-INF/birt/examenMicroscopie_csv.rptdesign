@@ -1,0 +1,564 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 4.2.1.v201209101448 Build &lt;4.2.1.v20120912-1721></property>
+    <simple-property-list name="includeResource">
+			<value>EpicamTranslations</value>
+			<value>EpicamTranslations_fr</value>
+			<value>EpicamTranslations_en</value>
+    </simple-property-list>
+    <property name="units">in</property>
+    <method name="beforeFactory"><![CDATA[
+    	var locale = params["loc"];
+		if(locale!=null) {
+			if(locale=="fr") {
+				reportContext.getDesignHandle().setLocale(Packages.com.ibm.icu.util.ULocale.FRENCH);
+			}
+			else if(locale=="en") {
+				reportContext.getDesignHandle().setLocale(Packages.com.ibm.icu.util.ULocale.ENGLISH);
+			}
+		}
+	]]></method>
+    <property name="iconFile">/templates/simple_listing.gif</property>
+    <property name="cheatSheet">org.eclipse.birt.report.designer.ui.cheatsheet.simplelisting</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <parameters>
+        <scalar-parameter name="loc">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>       
+        <scalar-parameter name="casTb_patient_identifiant">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript">new String()</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="casTb_patient_nom">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript">new String()</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="dateBefore">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript">new String()</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="dateAfter">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript">new String()</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="raisonDepistage">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript">new String()</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="resultat">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript">new String()</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <script-data-source name="ExamenMicroscopieHandler"/>
+    </data-sources>
+    <data-sets>
+        <script-data-set name="ExamenMicroscopieDataSet">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">Id</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">CreationDate</property>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">ModificationDate</property>
+                    <property name="dataType">date-time</property>
+                </structure>                      
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">CDT</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">LaboratoireReference</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">CasTb</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">Date</property>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">RaisonDepistage</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">Resultat</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">Observations</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">Id</property>
+                    <text-property name="displayName" key="field_id"></text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">CreationDate</property>
+                    <text-property name="displayName" key="field_creationDate"></text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">ModificationDate</property>
+                    <text-property name="displayName" key="field_lastModificationDate"></text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">CDT</property>
+                    <text-property name="displayName" key="examenMicroscopie_field_cDT"></text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">LaboratoireReference</property>
+                    <text-property name="displayName" key="examenMicroscopie_field_laboratoireReference"></text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">CasTb</property>
+                    <text-property name="displayName" key="examenMicroscopie_field_casTb"></text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Date</property>
+                    <text-property name="displayName" key="examenMicroscopie_field_date"></text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">RaisonDepistage</property>
+                    <text-property name="displayName" key="examenMicroscopie_field_raisonDepistage"></text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Resultat</property>
+                    <text-property name="displayName" key="examenMicroscopie_field_resultat"></text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Observations</property>
+                    <text-property name="displayName" key="examenMicroscopie_field_observations"></text-property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">Id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">CreationDate</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">ModificationDate</property>
+                        <property name="dataType">date-time</property>
+                    </structure>                
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">CDT</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">LaboratoireReference</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">CasTb</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">Date</property>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">RaisonDepistage</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">Resultat</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">Observations</property>
+                    <property name="dataType">string</property>
+                </structure>
+                </list-property>
+            </structure>
+            <method name="beforeOpen"><![CDATA[
+            
+	            count = 0;			
+	
+				// Get instance of Renderer
+				beanRenderer = Packages.org.imogene.epicam.server.EpicamServerRenderer.get();
+				beanRenderer.setLocale(params["loc"]);
+				
+				// Get instance of ExamenMicroscopieHandler class
+				examenMicroscopieHandler = spring.getBean("examenMicroscopieHandler");
+								
+				//Load the beans
+				beans =examenMicroscopieHandler.listForCsv("modified", false
+		, params["casTb_patient_identifiant"]
+		, params["casTb_patient_nom"]
+		, params["dateBefore"]
+		, params["dateAfter"]
+		, params["raisonDepistage"]
+		, params["resultat"]
+						);
+			]]></method>
+			<property name="dataSource">ExamenMicroscopieHandler</property>
+			<method name="fetch"><![CDATA[
+				if(beans != null) {
+				
+					if(count < beans.size()){
+					
+						var bean = beans.get(count);
+						
+					    row["Id"] = bean.getId();	
+					    row["CreationDate"] = bean.getCreated();
+					    row["ModificationDate"] = bean.getModified();							
+						
+						if (bean.getCDT() != null)	
+					    	row["CDT"] = beanRenderer.getDisplayValue(bean.getCDT());
+						if (bean.getLaboratoireReference() != null)	
+					    	row["LaboratoireReference"] = beanRenderer.getDisplayValue(bean.getLaboratoireReference());
+						if (bean.getCasTb() != null)	
+					    	row["CasTb"] = beanRenderer.getDisplayValue(bean.getCasTb());
+					    row["Date"] = bean.getDate();
+						if (bean.getRaisonDepistage() != null)	
+					    	row["RaisonDepistage"] = beanRenderer.getExamenMicroscopieEnumDisplayValue("raisonDepistage", bean.getRaisonDepistage());
+						if (bean.getResultat() != null)	
+					    	row["Resultat"] = beanRenderer.getExamenMicroscopieEnumDisplayValue("resultat", bean.getResultat());
+					    row["Observations"] = bean.getObservations();
+    	
+					    count++;
+					    return true;
+					}
+				}
+				return false; 
+	]]></method>
+        </script-data-set>
+    </data-sets>
+    <styles>
+        <style name="report" id="24">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">10pt</property>
+        </style>
+        <style name="crosstab-cell" id="25">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="crosstab" id="26">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="type">a4</property>
+            <property name="orientation">landscape</property>
+            <property name="showHeaderOnFirst">false</property>
+            <property name="showFooterOnLast">false</property>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <table id="171">
+            <property name="dataSet">ExamenMicroscopieDataSet</property>
+            <list-property name="boundDataColumns">               
+                <structure>
+                    <property name="name">Id</property>
+                    <text-property name="displayName" key="field_id"/>
+                    <expression name="expression" type="javascript">dataSetRow["Id"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>                   
+                    <property name="name">CreationDate</property>
+                    <text-property name="displayName" key="field_creationDate"/>
+                    <expression name="expression" type="javascript">dataSetRow["CreationDate"]</expression>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="name">ModificationDate</property>
+                    <text-property name="displayName" key="field_lastModificationDate"/>
+                    <expression name="expression" type="javascript">dataSetRow["ModificationDate"]</expression>
+                    <property name="dataType">date-time</property>
+                </structure>
+         
+                <structure>
+                    <property name="name">CDT</property>
+                    <text-property name="displayName" key="examenMicroscopie_field_cDT"/>
+                    <expression name="expression" type="javascript">dataSetRow["CDT"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">LaboratoireReference</property>
+                    <text-property name="displayName" key="examenMicroscopie_field_laboratoireReference"/>
+                    <expression name="expression" type="javascript">dataSetRow["LaboratoireReference"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">CasTb</property>
+                    <text-property name="displayName" key="examenMicroscopie_field_casTb"/>
+                    <expression name="expression" type="javascript">dataSetRow["CasTb"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Date</property>
+                    <text-property name="displayName" key="examenMicroscopie_field_date"/>
+                    <expression name="expression" type="javascript">dataSetRow["Date"]</expression>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="name">RaisonDepistage</property>
+                    <text-property name="displayName" key="examenMicroscopie_field_raisonDepistage"/>
+                    <expression name="expression" type="javascript">dataSetRow["RaisonDepistage"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Resultat</property>
+                    <text-property name="displayName" key="examenMicroscopie_field_resultat"/>
+                    <expression name="expression" type="javascript">dataSetRow["Resultat"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Observations</property>
+                    <text-property name="displayName" key="examenMicroscopie_field_observations"/>
+                    <expression name="expression" type="javascript">dataSetRow["Observations"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <column/>
+            <column/>
+            <column/>
+			<column/>
+			<column/>
+			<column/>
+			<column/>
+			<column/>
+			<column/>
+			<column/>
+            <header>
+                <row>
+                    <cell>
+                        <label>
+                            <text-property name="text" key="field_id"/>
+                        </label>
+                    </cell>                  
+                    <cell>
+                        <label>
+                            <text-property name="text" key="field_creationDate"/>
+                        </label>
+                    </cell>
+                    <cell>
+                        <label>
+                            <text-property name="text" key="field_lastModificationDate"/>
+                        </label>
+                    </cell>             
+                    <cell>
+                        <label>
+                            <text-property name="text" key="examenMicroscopie_field_cDT"/>
+                        </label>
+                    </cell>
+                    <cell>
+                        <label>
+                            <text-property name="text" key="examenMicroscopie_field_laboratoireReference"/>
+                        </label>
+                    </cell>
+                    <cell>
+                        <label>
+                            <text-property name="text" key="examenMicroscopie_field_casTb"/>
+                        </label>
+                    </cell>
+                    <cell>
+                        <label>
+                            <text-property name="text" key="examenMicroscopie_field_date"/>
+                        </label>
+                    </cell>
+                    <cell>
+                        <label>
+                            <text-property name="text" key="examenMicroscopie_field_raisonDepistage"/>
+                        </label>
+                    </cell>
+                    <cell>
+                        <label>
+                            <text-property name="text" key="examenMicroscopie_field_resultat"/>
+                        </label>
+                    </cell>
+                    <cell>
+                        <label>
+                            <text-property name="text" key="examenMicroscopie_field_observations"/>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row>
+                    <cell>
+                        <data>
+                            <property name="resultSetColumn">Id</property>
+                        </data>
+                    </cell>                 
+                    <cell>
+                        <data>
+                            <property name="resultSetColumn">CreationDate</property>
+                        </data>
+                    </cell>
+                    <cell>
+                        <data>
+                            <property name="resultSetColumn">ModificationDate</property>
+                        </data>
+                    </cell>
+                    <cell>
+                        <data>
+                            <property name="resultSetColumn">CDT</property>
+                        </data>
+                    </cell>
+                    <cell>
+                        <data>
+                            <property name="resultSetColumn">LaboratoireReference</property>
+                        </data>
+                    </cell>
+                    <cell>
+                        <data>
+                            <property name="resultSetColumn">CasTb</property>
+                        </data>
+                    </cell>
+                    <cell>
+                        <data>
+                            <property name="resultSetColumn">Date</property>
+                        </data>
+                    </cell>
+                    <cell>
+                        <data>
+                            <property name="resultSetColumn">RaisonDepistage</property>
+                        </data>
+                    </cell>
+                    <cell>
+                        <data>
+                            <property name="resultSetColumn">Resultat</property>
+                        </data>
+                    </cell>
+                    <cell>
+                        <data>
+                            <property name="resultSetColumn">Observations</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+        </table>
+    </body>
+</report>

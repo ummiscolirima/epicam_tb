@@ -1,0 +1,144 @@
+
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+	xmlns:g='urn:import:com.google.gwt.user.client.ui'
+	xmlns:imo='urn:import:org.imogene.web.client.ui.field.group'
+	xmlns:imo2='urn:import:org.imogene.web.client.ui.panel'
+	xmlns:imo3='urn:import:org.imogene.epicam.client.ui.panel'>
+
+	<ui:style src="../../../../web/client/css/ImogCss.css">
+		.mainPanel {
+			width: 100%;
+			height: 100%;
+		}
+		
+		.title {
+			margin-bottom: 20px;
+			font-size: 14px;
+			font-weight: bold;
+		}
+
+		.imogene-scroll {
+			width: 100%;
+			height: 95%;
+		}
+		.contentPanel {
+			width: 90%;
+			height: 100%;
+			margin-bottom: 10%;
+		}
+
+		
+
+		.imog-hlk {
+			cursor: pointer;
+			color: #444444;
+			font-size: 16px;
+		}
+
+		.imog-hlk a {
+			cursor: pointer;
+			color: #444444;
+		}
+
+		.imog-hlk a:hover {
+			text-decoration: underline;
+		}
+
+		.imog-menuItemPanel {
+			background: white;
+		}
+		
+		.messagePanel {
+			text-align: justify;
+		}		
+
+		.gwt-StackPanel {
+			background: white;
+  			border-bottom: 1px solid #bbbbbb;
+			border-top: 1px solid #bbbbbb;
+			border-right: 1px solid #bbbbbb;
+			border-left: 1px solid #bbbbbb;
+			width: 250px;
+			margin-right: 20px;
+		}
+
+		.gwt-StackPanel .gwt-StackPanelItem {
+  			cursor: pointer;
+  			cursor: hand;
+  			font-weight: bold;
+  			font-size: 1.3em;
+  			padding: 3px;
+  			border: 0px solid #bbbbbb;
+  			border-bottom: 0px;
+  			/*background: #d3def6 url(images/hborder.png) repeat-x 0px -989px;*/
+		}
+
+		.gwt-StackPanel .gwt-StackPanelContent {
+  			border: 0px solid #bbbbbb;
+  			border-bottom: 0px;
+  			background: white;
+  			padding: 2px 2px 10px 5px;
+			width: 100%;
+			height: 200px;
+		}		
+
+
+		@external .gwt-StackPanel, .gwt-StackPanelItem, .gwt-StackPanelContent;
+	</ui:style>
+
+	<g:DockPanel styleName="{style.pageBackground} {style.mainPanel}" >
+		<g:Dock direction="CENTER" >
+			<g:ScrollPanel ui:field="scrollPanel" styleName="{style.imogene-scroll}">
+
+				<g:VerticalPanel styleName="{style.pageBackground} {style.contentPanel}" horizontalAlignment="center" verticalAlignment="top">
+
+
+					<g:cell horizontalAlignment="center">
+						<imo:FieldGroupPanel ui:field="temaUsers">
+							<g:FlowPanel>
+								<imo2:EntityPanel ui:field="personnel" />	
+								<imo2:EntityPanel ui:field="utilisateur" />	
+							</g:FlowPanel>			
+						</imo:FieldGroupPanel>	
+					</g:cell>		
+
+					<g:cell horizontalAlignment="center">
+						<imo:FieldGroupPanel ui:field="temaAdministration">
+							<g:FlowPanel>
+								<imo2:EntityPanel ui:field="profile" />
+								<imo2:EntityPanel ui:field="notification" />
+								<imo2:EntityPanel ui:field="dynamicField_Template" />
+							</g:FlowPanel>			
+						</imo:FieldGroupPanel>	
+					</g:cell>
+					
+					<g:cell horizontalAlignment="center">
+						<imo:FieldGroupPanel ui:field="temaModel">
+							<g:FlowPanel>
+								<imo2:EntityPanel ui:field="cardEntity" />
+								<imo2:EntityPanel ui:field="fieldGroup" />
+							</g:FlowPanel>
+						</imo:FieldGroupPanel>
+					</g:cell>
+					<!-- 			add for help -->
+					<g:cell horizontalAlignment="center">
+						<imo:FieldGroupPanel ui:field="temaHelp">
+							<g:FlowPanel>
+								<g:HTML wordWrap="true" ui:field="helpMessage" styleName="{style.messagePanel}"/>								
+							</g:FlowPanel>			
+						</imo:FieldGroupPanel>	
+					</g:cell>
+					
+					<g:cell horizontalAlignment="center">
+						<g:HTML wordWrap="true" ui:field="homeMessage" styleName="{style.messagePanel}"/>
+					</g:cell>
+					
+
+
+				</g:VerticalPanel>
+
+			</g:ScrollPanel>
+		</g:Dock>
+	</g:DockPanel>
+</ui:UiBinder>
+

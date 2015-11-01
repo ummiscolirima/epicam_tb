@@ -1,0 +1,531 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xmlns:aop="http://www.springframework.org/schema/aop"
+     xmlns:tx="http://www.springframework.org/schema/tx"
+     xmlns:task="http://www.springframework.org/schema/task"
+     xmlns:context="http://www.springframework.org/schema/context"
+     xsi:schemaLocation="
+     http://www.springframework.org/schema/beans 
+     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+     http://www.springframework.org/schema/tx
+     http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+     http://www.springframework.org/schema/aop 
+     http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+     http://www.springframework.org/schema/context
+     http://www.springframework.org/schema/context/spring-context-3.0.xsd
+     http://www.springframework.org/schema/task
+     http://www.springframework.org/schema/task/spring-task-3.0.xsd">
+     
+	<!-- Annotations Scan -->
+    <context:annotation-config/>
+
+	<!-- Application properties -->
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location">
+		    <value>/WEB-INF/application.properties</value>
+		</property>
+	</bean>
+	
+	<!-- Spring security policy -->
+	<bean id="accessPolicyFactory" class="org.imogene.epicam.server.security.AccessPolicyFactoryImpl" />
+	
+	<!-- Spring-security users details provider -->
+	<bean id="imogSecurityDetailService" class="org.imogene.web.server.security.SecurityDetailService" >
+		<property name="genericHandler" ref="genericHandler"/>
+		<property name="handlerHelper" ref="handlerHelper"/>
+		<property name="accessPolicyFactory" ref="accessPolicyFactory" />
+  	</bean>
+  	
+	<!-- Spring-security access denied handler -->
+	<bean class="org.imogene.web.server.security.ImogAccessDeniedHandler" id="imogAccessDeniedUrl">
+        <property name="accessDeniedUrl" value="jsp/WrongLogin.jsp" />
+    </bean> 
+		
+	<!-- Video converter -->
+	<bean name="videoConverter" class="org.imogene.lib.media.VideoConverter">
+		<property name="commandLine" value="${converter.video}" />
+	</bean>
+
+	<!-- Audio converter -->
+	<bean name="audioConverter" class="org.imogene.lib.media.AudioConverter">
+		<property name="commandLine" value="${converter.video}" />
+	</bean>
+
+	<!-- Photo converter -->
+	<bean name="photoConverter" class="org.imogene.lib.media.PhotoConverter" />
+
+	<bean id="binaryOperation" class="org.imogene.lib.media.BinaryOperation">
+		<property name="audioConverter" ref="audioConverter" />
+		<property name="videoConverter" ref="videoConverter" />
+		<property name="photoConverter" ref="photoConverter" />
+	</bean>
+	
+	<!-- Services -->
+	<bean id="binaryDownloadService" class="org.imogene.web.server.service.BinaryDownloadServiceImpl" />
+	<bean id="binaryUploadService" class="org.imogene.web.server.service.BinaryUploadServiceImpl" />
+	
+	<!-- Handlers -->
+
+	<!-- Generic handler -->	
+	<bean id="genericHandler" class="org.imogene.web.server.handler.GenericHandler">
+		<property name="dao" ref="genericDao" />
+	</bean>	
+
+	<!-- Binary handler -->		
+	<bean id="binaryHandler" class="org.imogene.web.server.handler.BinaryHandler">
+		<property name="dao" ref="binaryDao" />
+	</bean>
+
+	<!-- Session handler -->	
+	<bean id="sessionHandler" class="org.imogene.web.server.handler.SessionHandler"/>
+	
+	<!-- Dynamic Fields handler -->
+	<bean id="dynamicFieldTemplateHandler" class="org.imogene.web.server.handler.DynamicFieldTemplateHandler">
+		<property name="dao" ref="dynamicFieldTemplateDao" />
+		<property name="dynamicFieldInstanceFieldTemplateDao" ref="dynamicFieldInstanceDao"/>
+		<property name="systemUtil" ref="systemUtil" />		
+	</bean>		
+	<bean id="dynamicFieldInstanceHandler" class="org.imogene.web.server.handler.DynamicFieldInstanceHandler">
+		<property name="dao" ref="dynamicFieldInstanceDao" />
+		<property name="fieldTemplateHandler" ref="dynamicFieldTemplateHandler" />
+	</bean>
+	
+	<!-- Profile handlers -->
+	<bean id="cardEntityHandler" class="org.imogene.web.server.handler.CardEntityHandler">
+		<property name="dao" ref="cardEntityDao" />
+		<property name="entityProfileDao" ref="entityProfileDao" />
+		<property name="fieldGroupProfileDao" ref="fieldGroupProfileDao" />
+		<property name="fieldGroupDao" ref="fieldGroupDao" />
+		<property name="systemUtil" ref="systemUtil" />
+		<property name="handlerHelper" ref="handlerHelper" />
+	</bean>
+	<bean id="entityProfileHandler" class="org.imogene.web.server.handler.EntityProfileHandler">
+		<property name="dao" ref="entityProfileDao" />
+		<property name="filter" ref="filter" />
+		<property name="systemUtil" ref="systemUtil" />
+		<property name="handlerHelper" ref="handlerHelper" />
+	</bean>
+	<bean id="fieldGroupHandler" class="org.imogene.web.server.handler.FieldGroupHandler">
+		<property name="dao" ref="fieldGroupDao" />
+		<property name="fieldGroupProfileDao" ref="fieldGroupProfileDao" />
+		<property name="filter" ref="filter" />
+		<property name="systemUtil" ref="systemUtil" />
+		<property name="handlerHelper" ref="handlerHelper" />
+	</bean>
+	<bean id="fieldGroupProfileHandler" class="org.imogene.web.server.handler.FieldGroupProfileHandler">
+		<property name="dao" ref="fieldGroupProfileDao" />
+		<property name="filter" ref="filter" />
+		<property name="systemUtil" ref="systemUtil" />
+		<property name="handlerHelper" ref="handlerHelper" />
+	</bean>
+	<bean id="profileHandler" class="org.imogene.web.server.handler.ProfileHandler">
+		<property name="dao" ref="profileDao" />
+		<property name="actorProfilesDao" ref="actorDao" />
+		<property name="entityProfileDao" ref="entityProfileDao" />
+		<property name="fieldGroupProfileDao" ref="fieldGroupProfileDao" />
+		<property name="filter" ref="filter" />
+		<property name="systemUtil" ref="systemUtil" />
+		<property name="handlerHelper" ref="handlerHelper" />
+		<property name="profileHelper" ref="profileHelper" />
+	</bean>
+	
+	<!-- Profile Helper -->
+	<bean id="profileHelper" class="org.imogene.epicam.server.handler.ProfileHelperImpl">
+		<property name="cardEntityDao" ref="cardEntityDao" />
+		<property name="fieldGroupDao" ref="fieldGroupDao" />
+	</bean>
+	
+	<!-- ImogActor handler -->
+	<bean id="imogActorHandler" class="org.imogene.web.server.handler.ImogActorHandler">
+		<property name="dao" ref="actorDao" />
+	</bean>
+
+	<!-- Notification handler -->
+	<bean id="notificationHandler" class="org.imogene.admin.server.handler.NotificationHandler">
+		<property name="dao" ref="notificationDao" />
+	</bean>		
+
+	<!-- Entity Handlers -->	
+	<bean id="patientHandler" class="org.imogene.epicam.server.handler.PatientHandler">
+		<property name="dao" ref="patientDao" />
+		<property name="filter" ref="filter" />
+		
+		
+		<property name="handlerHelper" ref="handlerHelper" />
+	</bean>		
+	<bean id="casIndexHandler" class="org.imogene.epicam.server.handler.CasIndexHandler">
+		<property name="dao" ref="casIndexDao" />
+		<property name="filter" ref="filter" />
+		
+		
+		<property name="handlerHelper" ref="handlerHelper" />
+	</bean>		
+	<bean id="casTuberculoseHandler" class="org.imogene.epicam.server.handler.CasTuberculoseHandler">
+		<property name="dao" ref="casTuberculoseDao" />
+		<property name="filter" ref="filter" />
+		
+		
+		<property name="handlerHelper" ref="handlerHelper" />
+	</bean>		
+	<bean id="examenSerologieHandler" class="org.imogene.epicam.server.handler.ExamenSerologieHandler">
+		<property name="dao" ref="examenSerologieDao" />
+		<property name="filter" ref="filter" />
+		
+		
+		<property name="handlerHelper" ref="handlerHelper" />
+	</bean>		
+	<bean id="examenBiologiqueHandler" class="org.imogene.epicam.server.handler.ExamenBiologiqueHandler">
+		<property name="dao" ref="examenBiologiqueDao" />
+		<property name="filter" ref="filter" />
+		
+		
+		<property name="handlerHelper" ref="handlerHelper" />
+	</bean>		
+	<bean id="examenMicroscopieHandler" class="org.imogene.epicam.server.handler.ExamenMicroscopieHandler">
+		<property name="dao" ref="examenMicroscopieDao" />
+		<property name="filter" ref="filter" />
+		
+		
+		<property name="handlerHelper" ref="handlerHelper" />
+	</bean>		
+	<bean id="examenATBHandler" class="org.imogene.epicam.server.handler.ExamenATBHandler">
+		<property name="dao" ref="examenATBDao" />
+		<property name="filter" ref="filter" />
+		
+		
+		<property name="handlerHelper" ref="handlerHelper" />
+	</bean>		
+	<bean id="priseMedicamenteuseHandler" class="org.imogene.epicam.server.handler.PriseMedicamenteuseHandler">
+		<property name="dao" ref="priseMedicamenteuseDao" />
+		<property name="filter" ref="filter" />
+		
+		
+		<property name="handlerHelper" ref="handlerHelper" />
+	</bean>		
+	<bean id="rendezVousHandler" class="org.imogene.epicam.server.handler.RendezVousHandler">
+		<property name="dao" ref="rendezVousDao" />
+		<property name="filter" ref="filter" />
+		
+		
+		<property name="handlerHelper" ref="handlerHelper" />
+	</bean>		
+	<bean id="transfertReferenceHandler" class="org.imogene.epicam.server.handler.TransfertReferenceHandler">
+		<property name="dao" ref="transfertReferenceDao" />
+		<property name="filter" ref="filter" />
+		
+		
+		<property name="handlerHelper" ref="handlerHelper" />
+		<property name="patientDao" ref="patientDao" />
+	</bean>		
+	<bean id="lotHandler" class="org.imogene.epicam.server.handler.LotHandler">
+		<property name="dao" ref="lotDao" />
+		<property name="filter" ref="filter" />
+		
+		
+		<property name="handlerHelper" ref="handlerHelper" />
+	</bean>		
+	<bean id="horsUsageHandler" class="org.imogene.epicam.server.handler.HorsUsageHandler">
+		<property name="dao" ref="horsUsageDao" />
+		<property name="filter" ref="filter" />
+		
+		
+		<property name="handlerHelper" ref="handlerHelper" />
+	</bean>		
+	<bean id="entreeLotHandler" class="org.imogene.epicam.server.handler.EntreeLotHandler">
+		<property name="dao" ref="entreeLotDao" />
+		<property name="filter" ref="filter" />
+		
+		
+		<property name="handlerHelper" ref="handlerHelper" />
+	</bean>		
+	<bean id="sortieLotHandler" class="org.imogene.epicam.server.handler.SortieLotHandler">
+		<property name="dao" ref="sortieLotDao" />
+		<property name="filter" ref="filter" />
+		
+		
+		<property name="handlerHelper" ref="handlerHelper" />
+	</bean>		
+	<bean id="commandeHandler" class="org.imogene.epicam.server.handler.CommandeHandler">
+		<property name="dao" ref="commandeDao" />
+		<property name="filter" ref="filter" />
+		
+		
+		<property name="handlerHelper" ref="handlerHelper" />
+	</bean>		
+	<bean id="detailCommandeMedicamentHandler" class="org.imogene.epicam.server.handler.DetailCommandeMedicamentHandler">
+		<property name="dao" ref="detailCommandeMedicamentDao" />
+		<property name="filter" ref="filter" />
+		
+		
+		<property name="handlerHelper" ref="handlerHelper" />
+	</bean>		
+	<bean id="detailCommandeIntrantHandler" class="org.imogene.epicam.server.handler.DetailCommandeIntrantHandler">
+		<property name="dao" ref="detailCommandeIntrantDao" />
+		<property name="filter" ref="filter" />
+		
+		
+		<property name="handlerHelper" ref="handlerHelper" />
+	</bean>		
+	<bean id="receptionHandler" class="org.imogene.epicam.server.handler.ReceptionHandler">
+		<property name="dao" ref="receptionDao" />
+		<property name="filter" ref="filter" />
+		
+		
+		<property name="handlerHelper" ref="handlerHelper" />
+	</bean>		
+	<bean id="detailReceptionMedicamentHandler" class="org.imogene.epicam.server.handler.DetailReceptionMedicamentHandler">
+		<property name="dao" ref="detailReceptionMedicamentDao" />
+		<property name="filter" ref="filter" />
+		
+		
+		<property name="handlerHelper" ref="handlerHelper" />
+	</bean>		
+	<bean id="detailReceptionIntrantHandler" class="org.imogene.epicam.server.handler.DetailReceptionIntrantHandler">
+		<property name="dao" ref="detailReceptionIntrantDao" />
+		<property name="filter" ref="filter" />
+		
+		
+		<property name="handlerHelper" ref="handlerHelper" />
+	</bean>		
+	<bean id="ravitaillementHandler" class="org.imogene.epicam.server.handler.RavitaillementHandler">
+		<property name="dao" ref="ravitaillementDao" />
+		<property name="filter" ref="filter" />
+		
+		
+		<property name="handlerHelper" ref="handlerHelper" />
+	</bean>		
+	<bean id="detailRavitaillementHandler" class="org.imogene.epicam.server.handler.DetailRavitaillementHandler">
+		<property name="dao" ref="detailRavitaillementDao" />
+		<property name="filter" ref="filter" />
+		
+		
+		<property name="handlerHelper" ref="handlerHelper" />
+	</bean>		
+	<bean id="inventaireHandler" class="org.imogene.epicam.server.handler.InventaireHandler">
+		<property name="dao" ref="inventaireDao" />
+		<property name="filter" ref="filter" />
+		
+		
+		<property name="handlerHelper" ref="handlerHelper" />
+	</bean>		
+	<bean id="detailInventaireHandler" class="org.imogene.epicam.server.handler.DetailInventaireHandler">
+		<property name="dao" ref="detailInventaireDao" />
+		<property name="filter" ref="filter" />
+		
+		
+		<property name="handlerHelper" ref="handlerHelper" />
+	</bean>		
+	<bean id="personnelHandler" class="org.imogene.epicam.server.handler.PersonnelHandler">
+		<property name="dao" ref="personnelDao" />
+		<property name="filter" ref="filter" />
+		
+		
+		<property name="handlerHelper" ref="handlerHelper" />
+	</bean>		
+	<bean id="departPersonnelHandler" class="org.imogene.epicam.server.handler.DepartPersonnelHandler">
+		<property name="dao" ref="departPersonnelDao" />
+		<property name="filter" ref="filter" />
+		
+		
+		<property name="handlerHelper" ref="handlerHelper" />
+	</bean>		
+	<bean id="arriveePersonnelHandler" class="org.imogene.epicam.server.handler.ArriveePersonnelHandler">
+		<property name="dao" ref="arriveePersonnelDao" />
+		<property name="filter" ref="filter" />
+		
+		
+		<property name="handlerHelper" ref="handlerHelper" />
+	</bean>		
+	<bean id="regionHandler" class="org.imogene.epicam.server.handler.RegionHandler">
+		<property name="dao" ref="regionDao" />
+		<property name="filter" ref="filter" />
+		
+		
+		<property name="handlerHelper" ref="handlerHelper" />
+	</bean>		
+	<bean id="districtSanteHandler" class="org.imogene.epicam.server.handler.DistrictSanteHandler">
+		<property name="dao" ref="districtSanteDao" />
+		<property name="filter" ref="filter" />
+		
+		
+		<property name="handlerHelper" ref="handlerHelper" />
+	</bean>		
+	<bean id="centreDiagTraitHandler" class="org.imogene.epicam.server.handler.CentreDiagTraitHandler">
+		<property name="dao" ref="centreDiagTraitDao" />
+		<property name="filter" ref="filter" />
+		
+		
+		<property name="handlerHelper" ref="handlerHelper" />
+	</bean>		
+	<bean id="laboratoireReferenceHandler" class="org.imogene.epicam.server.handler.LaboratoireReferenceHandler">
+		<property name="dao" ref="laboratoireReferenceDao" />
+		<property name="filter" ref="filter" />
+		
+		
+		<property name="handlerHelper" ref="handlerHelper" />
+	</bean>		
+	<bean id="lieuDitHandler" class="org.imogene.epicam.server.handler.LieuDitHandler">
+		<property name="dao" ref="lieuDitDao" />
+		<property name="filter" ref="filter" />
+		
+		
+		<property name="handlerHelper" ref="handlerHelper" />
+	</bean>		
+	<bean id="regimeHandler" class="org.imogene.epicam.server.handler.RegimeHandler">
+		<property name="dao" ref="regimeDao" />
+		<property name="filter" ref="filter" />
+		
+		
+		<property name="handlerHelper" ref="handlerHelper" />
+	</bean>		
+	<bean id="priseMedicamentRegimeHandler" class="org.imogene.epicam.server.handler.PriseMedicamentRegimeHandler">
+		<property name="dao" ref="priseMedicamentRegimeDao" />
+		<property name="filter" ref="filter" />
+		
+		
+		<property name="handlerHelper" ref="handlerHelper" />
+	</bean>		
+	<bean id="medicamentHandler" class="org.imogene.epicam.server.handler.MedicamentHandler">
+		<property name="dao" ref="medicamentDao" />
+		<property name="filter" ref="filter" />
+		
+		
+		<property name="handlerHelper" ref="handlerHelper" />
+	</bean>		
+	<bean id="intrantHandler" class="org.imogene.epicam.server.handler.IntrantHandler">
+		<property name="dao" ref="intrantDao" />
+		<property name="filter" ref="filter" />
+		
+		
+		<property name="handlerHelper" ref="handlerHelper" />
+	</bean>		
+	<bean id="formationHandler" class="org.imogene.epicam.server.handler.FormationHandler">
+		<property name="dao" ref="formationDao" />
+		<property name="filter" ref="filter" />
+		
+		
+		<property name="handlerHelper" ref="handlerHelper" />
+	</bean>		
+	<bean id="candidatureFormationHandler" class="org.imogene.epicam.server.handler.CandidatureFormationHandler">
+		<property name="dao" ref="candidatureFormationDao" />
+		<property name="filter" ref="filter" />
+		
+		
+		<property name="handlerHelper" ref="handlerHelper" />
+	</bean>		
+	<bean id="qualificationHandler" class="org.imogene.epicam.server.handler.QualificationHandler">
+		<property name="dao" ref="qualificationDao" />
+		<property name="filter" ref="filter" />
+		
+		
+		<property name="handlerHelper" ref="handlerHelper" />
+	</bean>		
+	<bean id="tutorielHandler" class="org.imogene.epicam.server.handler.TutorielHandler">
+		<property name="dao" ref="tutorielDao" />
+		<property name="filter" ref="filter" />
+		
+		
+		<property name="handlerHelper" ref="handlerHelper" />
+	</bean>		
+	<bean id="smsPredefiniHandler" class="org.imogene.epicam.server.handler.SmsPredefiniHandler">
+		<property name="dao" ref="smsPredefiniDao" />
+		<property name="filter" ref="filter" />
+		
+		
+		<property name="handlerHelper" ref="handlerHelper" />
+	</bean>		
+	<bean id="outBoxHandler" class="org.imogene.epicam.server.handler.OutBoxHandler">
+		<property name="dao" ref="outBoxDao" />
+		<property name="filter" ref="filter" />
+		
+		
+		<property name="handlerHelper" ref="handlerHelper" />
+	</bean>		
+	<bean id="utilisateurHandler" class="org.imogene.epicam.server.handler.UtilisateurHandler">
+		<property name="dao" ref="utilisateurDao" />
+		<property name="filter" ref="filter" />
+		
+		
+		<property name="handlerHelper" ref="handlerHelper" />
+	</bean>		
+	
+	<bean id="handlerHelper" class="org.imogene.epicam.server.handler.HandlerHelperImpl">
+		<property name="profileHandler" ref="profileHandler" />
+	    <property name="entityProfileHandler" ref="entityProfileHandler" />
+	    <property name="fieldGroupProfileHandler" ref="fieldGroupProfileHandler" />
+	    <property name="cardEntityHandler" ref="cardEntityHandler" />
+	    <property name="fieldGroupHandler" ref="fieldGroupHandler" />
+	    <property name="genericHandler" ref="genericHandler" />
+	    <property name="systemUtil" ref="systemUtil" />
+		<property name="patientHandler" ref="patientHandler" />
+		<property name="casIndexHandler" ref="casIndexHandler" />
+		<property name="casTuberculoseHandler" ref="casTuberculoseHandler" />
+		<property name="examenSerologieHandler" ref="examenSerologieHandler" />
+		<property name="examenBiologiqueHandler" ref="examenBiologiqueHandler" />
+		<property name="examenMicroscopieHandler" ref="examenMicroscopieHandler" />
+		<property name="examenATBHandler" ref="examenATBHandler" />
+		<property name="priseMedicamenteuseHandler" ref="priseMedicamenteuseHandler" />
+		<property name="rendezVousHandler" ref="rendezVousHandler" />
+		<property name="transfertReferenceHandler" ref="transfertReferenceHandler" />
+		<property name="lotHandler" ref="lotHandler" />
+		<property name="horsUsageHandler" ref="horsUsageHandler" />
+		<property name="entreeLotHandler" ref="entreeLotHandler" />
+		<property name="sortieLotHandler" ref="sortieLotHandler" />
+		<property name="commandeHandler" ref="commandeHandler" />
+		<property name="detailCommandeMedicamentHandler" ref="detailCommandeMedicamentHandler" />
+		<property name="detailCommandeIntrantHandler" ref="detailCommandeIntrantHandler" />
+		<property name="receptionHandler" ref="receptionHandler" />
+		<property name="detailReceptionMedicamentHandler" ref="detailReceptionMedicamentHandler" />
+		<property name="detailReceptionIntrantHandler" ref="detailReceptionIntrantHandler" />
+		<property name="ravitaillementHandler" ref="ravitaillementHandler" />
+		<property name="detailRavitaillementHandler" ref="detailRavitaillementHandler" />
+		<property name="inventaireHandler" ref="inventaireHandler" />
+		<property name="detailInventaireHandler" ref="detailInventaireHandler" />
+		<property name="personnelHandler" ref="personnelHandler" />
+		<property name="departPersonnelHandler" ref="departPersonnelHandler" />
+		<property name="arriveePersonnelHandler" ref="arriveePersonnelHandler" />
+		<property name="regionHandler" ref="regionHandler" />
+		<property name="districtSanteHandler" ref="districtSanteHandler" />
+		<property name="centreDiagTraitHandler" ref="centreDiagTraitHandler" />
+		<property name="laboratoireReferenceHandler" ref="laboratoireReferenceHandler" />
+		<property name="lieuDitHandler" ref="lieuDitHandler" />
+		<property name="regimeHandler" ref="regimeHandler" />
+		<property name="priseMedicamentRegimeHandler" ref="priseMedicamentRegimeHandler" />
+		<property name="medicamentHandler" ref="medicamentHandler" />
+		<property name="intrantHandler" ref="intrantHandler" />
+		<property name="formationHandler" ref="formationHandler" />
+		<property name="candidatureFormationHandler" ref="candidatureFormationHandler" />
+		<property name="qualificationHandler" ref="qualificationHandler" />
+		<property name="tutorielHandler" ref="tutorielHandler" />
+		<property name="smsPredefiniHandler" ref="smsPredefiniHandler" />
+		<property name="outBoxHandler" ref="outBoxHandler" />
+		<property name="utilisateurHandler" ref="utilisateurHandler" />
+	</bean>
+	
+	<bean id="systemUtil" class="org.imogene.lib.common.util.DefaultSystemUtil" />
+	
+	
+	<!-- add handler for EPICAM project reporting -->	
+	<bean id="reportHandler" class="org.imogene.epicam.server.handler.ReportHandler" />
+	
+	
+	<bean id="formUtil" class="org.imogene.epicam.server.util.EpicamFormUtil"/>	
+	
+	<!-- Bean filter handler for Birt --> 
+	<bean id="filter" class="org.imogene.epicam.server.security.ImogBeanFilterImpl" />
+
+	<task:scheduler id="scheduler" />
+
+	
+	<bean id="updateRequiredViewsStartupJob" class="org.imogene.epicam.server.db.UpdateRequiredViewsStartupJob" />
+
+	<bean id="startupManager" class="org.imogene.web.server.startup.StartupManager">
+		<property name="jobs">
+			<list>
+				<ref bean="updateRequiredViewsStartupJob" />
+			</list>
+		</property>
+	</bean>
+	
+</beans>

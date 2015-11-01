@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+  - DispatcherServlet application context for the Spring web MVC
+  - implementation of Epicamadmin web tier.
+  --> 
+<beans xmlns="http://www.springframework.org/schema/beans"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="
+     http://www.springframework.org/schema/beans 
+     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<!-- url handler for Spring 'classic' controller -->
+	<bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+					<prop key="/patient.txt">birtController</prop>
+					<prop key="/casIndex.txt">birtController</prop>
+					<prop key="/casTuberculose.txt">birtController</prop>
+					<prop key="/examenSerologie.txt">birtController</prop>
+					<prop key="/examenBiologique.txt">birtController</prop>
+					<prop key="/examenMicroscopie.txt">birtController</prop>
+					<prop key="/examenATB.txt">birtController</prop>
+					<prop key="/priseMedicamenteuse.txt">birtController</prop>
+					<prop key="/rendezVous.txt">birtController</prop>
+					<prop key="/transfertReference.txt">birtController</prop>
+					<prop key="/lot.txt">birtController</prop>
+					<prop key="/horsUsage.txt">birtController</prop>
+					<prop key="/entreeLot.txt">birtController</prop>
+					<prop key="/sortieLot.txt">birtController</prop>
+					<prop key="/commande.txt">birtController</prop>
+					<prop key="/detailCommandeMedicament.txt">birtController</prop>
+					<prop key="/detailCommandeIntrant.txt">birtController</prop>
+					<prop key="/reception.txt">birtController</prop>
+					<prop key="/detailReceptionMedicament.txt">birtController</prop>
+					<prop key="/detailReceptionIntrant.txt">birtController</prop>
+					<prop key="/ravitaillement.txt">birtController</prop>
+					<prop key="/detailRavitaillement.txt">birtController</prop>
+					<prop key="/inventaire.txt">birtController</prop>
+					<prop key="/detailInventaire.txt">birtController</prop>
+					<prop key="/personnel.txt">birtController</prop>
+					<prop key="/departPersonnel.txt">birtController</prop>
+					<prop key="/arriveePersonnel.txt">birtController</prop>
+					<prop key="/region.txt">birtController</prop>
+					<prop key="/districtSante.txt">birtController</prop>
+					<prop key="/centreDiagTrait.txt">birtController</prop>
+					<prop key="/laboratoireReference.txt">birtController</prop>
+					<prop key="/lieuDit.txt">birtController</prop>
+					<prop key="/regime.txt">birtController</prop>
+					<prop key="/priseMedicamentRegime.txt">birtController</prop>
+					<prop key="/medicament.txt">birtController</prop>
+					<prop key="/intrant.txt">birtController</prop>
+					<prop key="/formation.txt">birtController</prop>
+					<prop key="/candidatureFormation.txt">birtController</prop>
+					<prop key="/qualification.txt">birtController</prop>
+					<prop key="/tutoriel.txt">birtController</prop>
+					<prop key="/smsPredefini.txt">birtController</prop>
+					<prop key="/outBox.txt">birtController</prop>
+					<prop key="/utilisateur.txt">birtController</prop>
+				<!-- Add specific configuration for EPICAM project -->
+				<prop key="/atbRegister.pdf">birtController</prop>	
+				<prop key="/atbChildRegister.pdf">birtController</prop>	
+				<prop key="/atbLabRegister.pdf">birtController</prop>	
+				<prop key="/atrimesterTreatmentReport.pdf">birtController</prop>	
+				<prop key="/atrimesterLabReport.pdf">birtController</prop>	
+				<prop key="/atrimesterDetectReport.pdf">birtController</prop>	
+				<prop key="/atreatmentForm.pdf">birtController</prop>	
+				<prop key="/atransfertReferenceForm.pdf">birtController</prop>	
+				<prop key="/apatientCardForm.pdf">birtController</prop>	
+				<prop key="/adrugDistributionReport.pdf">birtController</prop>	
+				<!-- for tests -->	
+				<prop key="/registreTB.pdf">birtController</prop>	
+				<prop key="/rTB.pdf">birtController</prop>	
+			</props>
+		</property>
+	</bean>
+
+	<!--  Controller for report generation -->
+	<bean class="org.imogene.web.server.birt.BirtController" id="birtController">
+		<property name="birtView" ref="birtView" />
+	</bean>
+		
+	<bean class="org.imogene.web.server.birt.BirtView" id="birtView">
+		<property name="birtEngine" ref="birtEngine" />
+	</bean>
+		
+	<bean class="org.imogene.web.server.birt.BirtEngineFactory" id="birtEngine"/>
+
+</beans>

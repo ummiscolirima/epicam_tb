@@ -1,0 +1,882 @@
+<?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="
+     http://www.springframework.org/schema/beans 
+     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<!-- Initialize the UTC date converter -->
+	<bean id="utcDateConverter" class="org.imogene.lib.sync.serializer.xml.UTCDateConverter" />
+	
+	<!-- Initialize the Association Converter -->
+	<bean id="associationConverter" class="org.imogene.lib.sync.serializer.xml.AssociationConverter">
+		<property name="dataHandlerManager" ref="dataHandlerManager"/>
+	</bean>
+	
+	<!-- Initialize the Collection Converter -->
+	<bean id="collectionConverter" class="org.imogene.lib.sync.serializer.xml.CollectionConverter">
+		<property name="dataHandlerManager" ref="dataHandlerManager"/>
+	</bean>
+	
+	<!-- Initialize the Binary Converter -->
+	<bean id="binaryConverter" class="org.imogene.lib.sync.binary.file.BinaryFileConverter"/> 	
+	
+	<!-- Initialize the DynamicFieldtemplate convertor for the DynamicFieldInstance -->
+	<bean id="dynFieldInstanceTemplateConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter" >
+	    <property name="className" value="org.imogene.lib.common.dynamicfields.DynamicFieldInstance"/>
+		<property name="propertyName" value="fieldTemplate"/>
+		<property name="converter" ref="associationConverter"/>
+	</bean>
+
+	<!-- Initialize the actor convertor for the DynamicFieldTemplate -->
+	<bean id="dynFieldTemplateActorConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter" >
+	    <property name="className" value="org.imogene.lib.common.dynamicfields.DynamicFieldTemplate"/>
+		<property name="propertyName" value="templateCreator"/>
+		<property name="converter" ref="associationConverter"/>
+	</bean>
+	
+	<!-- Initialize the DynamicFieldInstance converter for the entities -->
+	<bean id="dynamicFieldInstancePropertyConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter" >
+	    <property name="className" value="org.imogene.lib.common.entity.ImogEntityImpl"/>
+		<property name="propertyName" value="dynamicFieldValues"/>
+		<property name="converter" ref="collectionConverter"/>
+	</bean>
+
+	<!-- Initialize Synchronizables converters -->
+	<bean id="synchronizablesActorConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+		<property name="className" value="org.imogene.lib.common.entity.ImogActorImpl"/>
+		<property name="propertyName" value="synchronizables"/>
+		<property name="converter" ref="collectionConverter"/>
+	</bean>	  
+
+	<!-- Initialize Profiles converters -->
+	<bean id="profilesActorConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+		<property name="className" value="org.imogene.lib.common.entity.ImogActorImpl"/>
+		<property name="propertyName" value="profiles"/>
+		<property name="converter" ref="collectionConverter"/>
+	</bean>	  
+
+	<bean id="entityProfilesProfileConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+		<property name="className" value="org.imogene.lib.common.profile.Profile"/>
+		<property name="propertyName" value="entityProfiles"/>
+		<property name="converter" ref="collectionConverter"/>
+	</bean>	  
+
+	<bean id="fieldGroupProfilesProfileConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+		<property name="className" value="org.imogene.lib.common.profile.Profile"/>
+		<property name="propertyName" value="fieldGroupProfiles"/>
+		<property name="converter" ref="collectionConverter"/>
+	</bean>	  
+
+	<bean id="profileEntityProfileConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+		<property name="className" value="org.imogene.lib.common.profile.EntityProfile"/>
+		<property name="propertyName" value="profile"/>
+		<property name="converter" ref="associationConverter"/>
+	</bean>	  
+
+	<bean id="entityEntityProfileConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+		<property name="className" value="org.imogene.lib.common.profile.EntityProfile"/>
+		<property name="propertyName" value="entity"/>
+		<property name="converter" ref="associationConverter"/>
+	</bean>	  
+
+	<bean id="profileFieldGroupProfileConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+		<property name="className" value="org.imogene.lib.common.profile.FieldGroupProfile"/>
+		<property name="propertyName" value="profile"/>
+		<property name="converter" ref="associationConverter"/>
+	</bean>
+
+	<bean id="cardEntityFieldGroupProfileConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+		<property name="className" value="org.imogene.lib.common.profile.FieldGroupProfile"/>
+		<property name="propertyName" value="cardEntity"/>
+		<property name="converter" ref="associationConverter"/>
+	</bean>
+
+	<bean id="fieldGroupFieldGroupProfileConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+		<property name="className" value="org.imogene.lib.common.profile.FieldGroupProfile"/>
+		<property name="propertyName" value="fieldGroup"/>
+		<property name="converter" ref="associationConverter"/>
+	</bean>
+
+	<bean id="entityFieldGroupConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+		<property name="className" value="org.imogene.lib.common.model.FieldGroup"/>
+		<property name="propertyName" value="entity"/>
+		<property name="converter" ref="associationConverter"/>
+	</bean>
+	
+	<!-- Initialize the Entity Converters -->
+<bean id="centresPatientConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.Patient"/>
+	<property name="propertyName" value="centres"/>
+	<property name="converter" ref="collectionConverter"/>
+</bean>	  
+<bean id="lieuxDitsPatientConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.Patient"/>
+	<property name="propertyName" value="lieuxDits"/>
+	<property name="converter" ref="collectionConverter"/>
+</bean>	  
+<bean id="casTuberculosePatientConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.Patient"/>
+	<property name="propertyName" value="casTuberculose"/>
+	<property name="converter" ref="collectionConverter"/>
+</bean>	  
+<bean id="casIndexPatientConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.Patient"/>
+	<property name="propertyName" value="casIndex"/>
+	<property name="converter" ref="collectionConverter"/>
+</bean>	  
+<bean id="examensBiologiquesPatientConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.Patient"/>
+	<property name="propertyName" value="examensBiologiques"/>
+	<property name="converter" ref="collectionConverter"/>
+</bean>	  
+<bean id="serologiesPatientConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.Patient"/>
+	<property name="propertyName" value="serologies"/>
+	<property name="converter" ref="collectionConverter"/>
+</bean>	  
+<bean id="patientCasIndexConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.CasIndex"/>
+	<property name="propertyName" value="patient"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="patientLieCasIndexConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.CasIndex"/>
+	<property name="propertyName" value="patientLie"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="patientCasTuberculoseConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.CasTuberculose"/>
+	<property name="propertyName" value="patient"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="examensMiscrocopiesCasTuberculoseConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.CasTuberculose"/>
+	<property name="propertyName" value="examensMiscrocopies"/>
+	<property name="converter" ref="collectionConverter"/>
+</bean>	  
+<bean id="examensATBCasTuberculoseConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.CasTuberculose"/>
+	<property name="propertyName" value="examensATB"/>
+	<property name="converter" ref="collectionConverter"/>
+</bean>	  
+<bean id="regimePhaseInitialeCasTuberculoseConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.CasTuberculose"/>
+	<property name="propertyName" value="regimePhaseInitiale"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="regimePhaseContinuationCasTuberculoseConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.CasTuberculose"/>
+	<property name="propertyName" value="regimePhaseContinuation"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="priseMedicamenteusePhaseInitialeCasTuberculoseConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.CasTuberculose"/>
+	<property name="propertyName" value="priseMedicamenteusePhaseInitiale"/>
+	<property name="converter" ref="collectionConverter"/>
+</bean>	  
+<bean id="priseMedicamenteusePhaseContinuationCasTuberculoseConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.CasTuberculose"/>
+	<property name="propertyName" value="priseMedicamenteusePhaseContinuation"/>
+	<property name="converter" ref="collectionConverter"/>
+</bean>	  
+<bean id="rendezVousCasTuberculoseConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.CasTuberculose"/>
+	<property name="propertyName" value="rendezVous"/>
+	<property name="converter" ref="collectionConverter"/>
+</bean>	  
+<bean id="patientExamenSerologieConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.ExamenSerologie"/>
+	<property name="propertyName" value="patient"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="patientExamenBiologiqueConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.ExamenBiologique"/>
+	<property name="propertyName" value="patient"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="CDTExamenMicroscopieConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.ExamenMicroscopie"/>
+	<property name="propertyName" value="CDT"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="laboratoireReferenceExamenMicroscopieConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.ExamenMicroscopie"/>
+	<property name="propertyName" value="laboratoireReference"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="casTbExamenMicroscopieConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.ExamenMicroscopie"/>
+	<property name="propertyName" value="casTb"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="CDTExamenATBConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.ExamenATB"/>
+	<property name="propertyName" value="CDT"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="laboratoireReferenceExamenATBConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.ExamenATB"/>
+	<property name="propertyName" value="laboratoireReference"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="casTbExamenATBConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.ExamenATB"/>
+	<property name="propertyName" value="casTb"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="phaseIntensivePriseMedicamenteuseConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.PriseMedicamenteuse"/>
+	<property name="propertyName" value="phaseIntensive"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="phaseContinuationPriseMedicamenteuseConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.PriseMedicamenteuse"/>
+	<property name="propertyName" value="phaseContinuation"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="casTbRendezVousConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.RendezVous"/>
+	<property name="propertyName" value="casTb"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="regionTransfertReferenceConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.TransfertReference"/>
+	<property name="propertyName" value="region"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="districtSanteTransfertReferenceConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.TransfertReference"/>
+	<property name="propertyName" value="districtSante"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="CDTDepartTransfertReferenceConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.TransfertReference"/>
+	<property name="propertyName" value="CDTDepart"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="patientTransfertReferenceConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.TransfertReference"/>
+	<property name="propertyName" value="patient"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="regionArriveeTransfertReferenceConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.TransfertReference"/>
+	<property name="propertyName" value="regionArrivee"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="districtSanteArriveeTransfertReferenceConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.TransfertReference"/>
+	<property name="propertyName" value="districtSanteArrivee"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="CDTArriveeTransfertReferenceConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.TransfertReference"/>
+	<property name="propertyName" value="CDTArrivee"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="regionLotConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.Lot"/>
+	<property name="propertyName" value="region"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="districtSanteLotConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.Lot"/>
+	<property name="propertyName" value="districtSante"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="CDTLotConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.Lot"/>
+	<property name="propertyName" value="CDT"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="medicamentLotConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.Lot"/>
+	<property name="propertyName" value="medicament"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="intrantLotConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.Lot"/>
+	<property name="propertyName" value="intrant"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="lotHorsUsageConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.HorsUsage"/>
+	<property name="propertyName" value="lot"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="CDTEntreeLotConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.EntreeLot"/>
+	<property name="propertyName" value="CDT"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="lotEntreeLotConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.EntreeLot"/>
+	<property name="propertyName" value="lot"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="CDTSortieLotConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.SortieLot"/>
+	<property name="propertyName" value="CDT"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="lotSortieLotConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.SortieLot"/>
+	<property name="propertyName" value="lot"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="regionCommandeConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.Commande"/>
+	<property name="propertyName" value="region"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="districtSanteCommandeConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.Commande"/>
+	<property name="propertyName" value="districtSante"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="CDTCommandeConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.Commande"/>
+	<property name="propertyName" value="CDT"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="medicamentsCommandeConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.Commande"/>
+	<property name="propertyName" value="medicaments"/>
+	<property name="converter" ref="collectionConverter"/>
+</bean>	  
+<bean id="intrantsCommandeConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.Commande"/>
+	<property name="propertyName" value="intrants"/>
+	<property name="converter" ref="collectionConverter"/>
+</bean>	  
+<bean id="commandeDetailCommandeMedicamentConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.DetailCommandeMedicament"/>
+	<property name="propertyName" value="commande"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="medicamentDetailCommandeMedicamentConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.DetailCommandeMedicament"/>
+	<property name="propertyName" value="medicament"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="commandeDetailCommandeIntrantConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.DetailCommandeIntrant"/>
+	<property name="propertyName" value="commande"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="intrantDetailCommandeIntrantConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.DetailCommandeIntrant"/>
+	<property name="propertyName" value="intrant"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="regionReceptionConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.Reception"/>
+	<property name="propertyName" value="region"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="districtSanteReceptionConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.Reception"/>
+	<property name="propertyName" value="districtSante"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="CDTReceptionConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.Reception"/>
+	<property name="propertyName" value="CDT"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="commandeReceptionConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.Reception"/>
+	<property name="propertyName" value="commande"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="medicamentsReceptionConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.Reception"/>
+	<property name="propertyName" value="medicaments"/>
+	<property name="converter" ref="collectionConverter"/>
+</bean>	  
+<bean id="intrantsReceptionConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.Reception"/>
+	<property name="propertyName" value="intrants"/>
+	<property name="converter" ref="collectionConverter"/>
+</bean>	  
+<bean id="receptionDetailReceptionMedicamentConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.DetailReceptionMedicament"/>
+	<property name="propertyName" value="reception"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="commandeDetailReceptionMedicamentConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.DetailReceptionMedicament"/>
+	<property name="propertyName" value="commande"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="detailCommandeDetailReceptionMedicamentConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.DetailReceptionMedicament"/>
+	<property name="propertyName" value="detailCommande"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="entreeLotDetailReceptionMedicamentConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.DetailReceptionMedicament"/>
+	<property name="propertyName" value="entreeLot"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="receptionDetailReceptionIntrantConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.DetailReceptionIntrant"/>
+	<property name="propertyName" value="reception"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="commandeDetailReceptionIntrantConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.DetailReceptionIntrant"/>
+	<property name="propertyName" value="commande"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="detailCommandeDetailReceptionIntrantConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.DetailReceptionIntrant"/>
+	<property name="propertyName" value="detailCommande"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="entreeLotDetailReceptionIntrantConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.DetailReceptionIntrant"/>
+	<property name="propertyName" value="entreeLot"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="regionRavitaillementConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.Ravitaillement"/>
+	<property name="propertyName" value="region"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="districtSanteRavitaillementConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.Ravitaillement"/>
+	<property name="propertyName" value="districtSante"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="CDTDepartRavitaillementConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.Ravitaillement"/>
+	<property name="propertyName" value="CDTDepart"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="regionArriveeRavitaillementConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.Ravitaillement"/>
+	<property name="propertyName" value="regionArrivee"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="districtSanteArriveeRavitaillementConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.Ravitaillement"/>
+	<property name="propertyName" value="districtSanteArrivee"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="CDTArriveeRavitaillementConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.Ravitaillement"/>
+	<property name="propertyName" value="CDTArrivee"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="detailsRavitaillementConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.Ravitaillement"/>
+	<property name="propertyName" value="details"/>
+	<property name="converter" ref="collectionConverter"/>
+</bean>	  
+<bean id="ravitaillementDetailRavitaillementConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.DetailRavitaillement"/>
+	<property name="propertyName" value="ravitaillement"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="sortieLotDetailRavitaillementConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.DetailRavitaillement"/>
+	<property name="propertyName" value="sortieLot"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="entreeLotDetailRavitaillementConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.DetailRavitaillement"/>
+	<property name="propertyName" value="entreeLot"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="regionInventaireConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.Inventaire"/>
+	<property name="propertyName" value="region"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="districtSanteInventaireConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.Inventaire"/>
+	<property name="propertyName" value="districtSante"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="CDTInventaireConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.Inventaire"/>
+	<property name="propertyName" value="CDT"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="detailsInventaireConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.Inventaire"/>
+	<property name="propertyName" value="details"/>
+	<property name="converter" ref="collectionConverter"/>
+</bean>	  
+<bean id="inventaireDetailInventaireConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.DetailInventaire"/>
+	<property name="propertyName" value="inventaire"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="CDTDetailInventaireConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.DetailInventaire"/>
+	<property name="propertyName" value="CDT"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="lotDetailInventaireConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.DetailInventaire"/>
+	<property name="propertyName" value="lot"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="qualificationPersonnelConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.Personnel"/>
+	<property name="propertyName" value="qualification"/>
+	<property name="converter" ref="collectionConverter"/>
+</bean>	  
+<bean id="regionPersonnelConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.Personnel"/>
+	<property name="propertyName" value="region"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="districtSantePersonnelConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.Personnel"/>
+	<property name="propertyName" value="districtSante"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="CDTPersonnelConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.Personnel"/>
+	<property name="propertyName" value="CDT"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="regionDepartPersonnelConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.DepartPersonnel"/>
+	<property name="propertyName" value="region"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="districtSanteDepartPersonnelConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.DepartPersonnel"/>
+	<property name="propertyName" value="districtSante"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="CDTDepartPersonnelConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.DepartPersonnel"/>
+	<property name="propertyName" value="CDT"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="personnelDepartPersonnelConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.DepartPersonnel"/>
+	<property name="propertyName" value="personnel"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="regionArriveePersonnelConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.ArriveePersonnel"/>
+	<property name="propertyName" value="region"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="districtSanteArriveePersonnelConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.ArriveePersonnel"/>
+	<property name="propertyName" value="districtSante"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="CDTArriveePersonnelConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.ArriveePersonnel"/>
+	<property name="propertyName" value="CDT"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="personnelArriveePersonnelConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.ArriveePersonnel"/>
+	<property name="propertyName" value="personnel"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="districtSantesRegionConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.Region"/>
+	<property name="propertyName" value="districtSantes"/>
+	<property name="converter" ref="collectionConverter"/>
+</bean>	  
+<bean id="regionDistrictSanteConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.DistrictSante"/>
+	<property name="propertyName" value="region"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="regionCentreDiagTraitConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.CentreDiagTrait"/>
+	<property name="propertyName" value="region"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="districtSanteCentreDiagTraitConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.CentreDiagTrait"/>
+	<property name="propertyName" value="districtSante"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="lieuxDitsCentreDiagTraitConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.CentreDiagTrait"/>
+	<property name="propertyName" value="lieuxDits"/>
+	<property name="converter" ref="collectionConverter"/>
+</bean>	  
+<bean id="regionLaboratoireReferenceConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.LaboratoireReference"/>
+	<property name="propertyName" value="region"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="districtSanteLaboratoireReferenceConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.LaboratoireReference"/>
+	<property name="propertyName" value="districtSante"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="lieuxDitsLaboratoireReferenceConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.LaboratoireReference"/>
+	<property name="propertyName" value="lieuxDits"/>
+	<property name="converter" ref="collectionConverter"/>
+</bean>	  
+<bean id="prisesMedicamenteusesRegimeConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.Regime"/>
+	<property name="propertyName" value="prisesMedicamenteuses"/>
+	<property name="converter" ref="collectionConverter"/>
+</bean>	  
+<bean id="regimePriseMedicamentRegimeConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.PriseMedicamentRegime"/>
+	<property name="propertyName" value="regime"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="medicamentPriseMedicamentRegimeConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.PriseMedicamentRegime"/>
+	<property name="propertyName" value="medicament"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="candidaturesFormationConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.Formation"/>
+	<property name="propertyName" value="candidatures"/>
+	<property name="converter" ref="collectionConverter"/>
+</bean>	  
+<bean id="formationCandidatureFormationConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.CandidatureFormation"/>
+	<property name="propertyName" value="formation"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="regionCandidatureFormationConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.CandidatureFormation"/>
+	<property name="propertyName" value="region"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="districtSanteCandidatureFormationConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.CandidatureFormation"/>
+	<property name="propertyName" value="districtSante"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="CDTCandidatureFormationConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.CandidatureFormation"/>
+	<property name="propertyName" value="CDT"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="personnelCandidatureFormationConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.CandidatureFormation"/>
+	<property name="propertyName" value="personnel"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+<bean id="audioTTutorielConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.Tutoriel"/>
+	<property name="propertyName" value="audioT"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>
+<bean id="videoTTutorielConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.Tutoriel"/>
+	<property name="propertyName" value="videoT"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>
+<bean id="textTTutorielConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.Tutoriel"/>
+	<property name="propertyName" value="textT"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>
+<bean id="patientOutBoxConverter" class="org.imogene.lib.sync.serializer.xml.PropertyConverter">
+	<property name="className" value="org.imogene.epicam.domain.entity.OutBox"/>
+	<property name="propertyName" value="patient"/>
+	<property name="converter" ref="associationConverter"/>
+</bean>	  
+	
+	<!-- Initialize the omitted fields -->
+	<bean id="omitUploadDate" class="org.imogene.lib.sync.serializer.xml.OmittedProperty">
+		<property name="className" value="org.imogene.lib.common.entity.ImogBeanImpl" />
+		<property name="propertyName" value="uploadDate" />
+	</bean>
+	<bean id="omitVersion" class="org.imogene.lib.sync.serializer.xml.OmittedProperty">
+		<property name="className" value="org.imogene.lib.common.entity.ImogBeanImpl" />
+		<property name="propertyName" value="version" />
+	</bean>
+	<bean id="omitNotificationLocale" class="org.imogene.lib.sync.serializer.xml.OmittedProperty">
+		<property name="className" value="org.imogene.lib.common.entity.ImogActorImpl" />
+		<property name="propertyName" value="notificationLocale" />
+	</bean>
+	<bean id="omitNotificationMethod" class="org.imogene.lib.sync.serializer.xml.OmittedProperty">
+		<property name="className" value="org.imogene.lib.common.entity.ImogActorImpl" />
+		<property name="propertyName" value="notificationMethod" />
+	</bean>
+	<bean id="omitBeNotified" class="org.imogene.lib.sync.serializer.xml.OmittedProperty">
+		<property name="className" value="org.imogene.lib.common.entity.ImogActorImpl" />
+		<property name="propertyName" value="beNotified" />
+	</bean>
+	<bean id="omitNotificationData" class="org.imogene.lib.sync.serializer.xml.OmittedProperty">
+		<property name="className" value="org.imogene.lib.common.entity.ImogActorImpl" />
+		<property name="propertyName" value="notificationData" />
+	</bean>
+	<bean id="omitLastLoginDate" class="org.imogene.lib.sync.serializer.xml.OmittedProperty">
+		<property name="className" value="org.imogene.lib.common.entity.ImogActorImpl" />
+		<property name="propertyName" value="lastLoginDate" />
+	</bean>
+	
+	<!-- Initialize the XML serializer -->
+	<bean id="xmlSerializer" class="org.imogene.lib.sync.server.serializer.xml.ImogXmlSerializerImpl">
+		<property name="dataHandlerManager" ref="dataHandlerManager"/>
+		<property name="binaryOperation" ref="binaryOperation"/>
+		<property name="propertyConverters">
+			<set>
+				<ref bean="dynFieldInstanceTemplateConverter"/>
+				<ref bean="dynFieldTemplateActorConverter"/>
+				<ref bean="dynamicFieldInstancePropertyConverter"/>
+				<ref bean="synchronizablesActorConverter"/>
+				<ref bean="profilesActorConverter"/>
+				<ref bean="entityProfilesProfileConverter"/>
+				<ref bean="fieldGroupProfilesProfileConverter"/>
+				<ref bean="profileEntityProfileConverter"/>
+				<ref bean="entityEntityProfileConverter"/>
+				<ref bean="profileFieldGroupProfileConverter"/>
+				<ref bean="cardEntityFieldGroupProfileConverter"/>
+				<ref bean="fieldGroupFieldGroupProfileConverter"/>
+				<ref bean="entityFieldGroupConverter"/>
+<ref bean="centresPatientConverter"/>
+<ref bean="lieuxDitsPatientConverter"/>
+<ref bean="casTuberculosePatientConverter"/>
+<ref bean="casIndexPatientConverter"/>
+<ref bean="examensBiologiquesPatientConverter"/>
+<ref bean="serologiesPatientConverter"/>
+<ref bean="patientCasIndexConverter"/>
+<ref bean="patientLieCasIndexConverter"/>
+<ref bean="patientCasTuberculoseConverter"/>
+<ref bean="examensMiscrocopiesCasTuberculoseConverter"/>
+<ref bean="examensATBCasTuberculoseConverter"/>
+<ref bean="regimePhaseInitialeCasTuberculoseConverter"/>
+<ref bean="regimePhaseContinuationCasTuberculoseConverter"/>
+<ref bean="priseMedicamenteusePhaseInitialeCasTuberculoseConverter"/>
+<ref bean="priseMedicamenteusePhaseContinuationCasTuberculoseConverter"/>
+<ref bean="rendezVousCasTuberculoseConverter"/>
+<ref bean="patientExamenSerologieConverter"/>
+<ref bean="patientExamenBiologiqueConverter"/>
+<ref bean="CDTExamenMicroscopieConverter"/>
+<ref bean="laboratoireReferenceExamenMicroscopieConverter"/>
+<ref bean="casTbExamenMicroscopieConverter"/>
+<ref bean="CDTExamenATBConverter"/>
+<ref bean="laboratoireReferenceExamenATBConverter"/>
+<ref bean="casTbExamenATBConverter"/>
+<ref bean="phaseIntensivePriseMedicamenteuseConverter"/>
+<ref bean="phaseContinuationPriseMedicamenteuseConverter"/>
+<ref bean="casTbRendezVousConverter"/>
+<ref bean="regionTransfertReferenceConverter"/>
+<ref bean="districtSanteTransfertReferenceConverter"/>
+<ref bean="CDTDepartTransfertReferenceConverter"/>
+<ref bean="patientTransfertReferenceConverter"/>
+<ref bean="regionArriveeTransfertReferenceConverter"/>
+<ref bean="districtSanteArriveeTransfertReferenceConverter"/>
+<ref bean="CDTArriveeTransfertReferenceConverter"/>
+<ref bean="regionLotConverter"/>
+<ref bean="districtSanteLotConverter"/>
+<ref bean="CDTLotConverter"/>
+<ref bean="medicamentLotConverter"/>
+<ref bean="intrantLotConverter"/>
+<ref bean="lotHorsUsageConverter"/>
+<ref bean="CDTEntreeLotConverter"/>
+<ref bean="lotEntreeLotConverter"/>
+<ref bean="CDTSortieLotConverter"/>
+<ref bean="lotSortieLotConverter"/>
+<ref bean="regionCommandeConverter"/>
+<ref bean="districtSanteCommandeConverter"/>
+<ref bean="CDTCommandeConverter"/>
+<ref bean="medicamentsCommandeConverter"/>
+<ref bean="intrantsCommandeConverter"/>
+<ref bean="commandeDetailCommandeMedicamentConverter"/>
+<ref bean="medicamentDetailCommandeMedicamentConverter"/>
+<ref bean="commandeDetailCommandeIntrantConverter"/>
+<ref bean="intrantDetailCommandeIntrantConverter"/>
+<ref bean="regionReceptionConverter"/>
+<ref bean="districtSanteReceptionConverter"/>
+<ref bean="CDTReceptionConverter"/>
+<ref bean="commandeReceptionConverter"/>
+<ref bean="medicamentsReceptionConverter"/>
+<ref bean="intrantsReceptionConverter"/>
+<ref bean="receptionDetailReceptionMedicamentConverter"/>
+<ref bean="commandeDetailReceptionMedicamentConverter"/>
+<ref bean="detailCommandeDetailReceptionMedicamentConverter"/>
+<ref bean="entreeLotDetailReceptionMedicamentConverter"/>
+<ref bean="receptionDetailReceptionIntrantConverter"/>
+<ref bean="commandeDetailReceptionIntrantConverter"/>
+<ref bean="detailCommandeDetailReceptionIntrantConverter"/>
+<ref bean="entreeLotDetailReceptionIntrantConverter"/>
+<ref bean="regionRavitaillementConverter"/>
+<ref bean="districtSanteRavitaillementConverter"/>
+<ref bean="CDTDepartRavitaillementConverter"/>
+<ref bean="regionArriveeRavitaillementConverter"/>
+<ref bean="districtSanteArriveeRavitaillementConverter"/>
+<ref bean="CDTArriveeRavitaillementConverter"/>
+<ref bean="detailsRavitaillementConverter"/>
+<ref bean="ravitaillementDetailRavitaillementConverter"/>
+<ref bean="sortieLotDetailRavitaillementConverter"/>
+<ref bean="entreeLotDetailRavitaillementConverter"/>
+<ref bean="regionInventaireConverter"/>
+<ref bean="districtSanteInventaireConverter"/>
+<ref bean="CDTInventaireConverter"/>
+<ref bean="detailsInventaireConverter"/>
+<ref bean="inventaireDetailInventaireConverter"/>
+<ref bean="CDTDetailInventaireConverter"/>
+<ref bean="lotDetailInventaireConverter"/>
+<ref bean="qualificationPersonnelConverter"/>
+<ref bean="regionPersonnelConverter"/>
+<ref bean="districtSantePersonnelConverter"/>
+<ref bean="CDTPersonnelConverter"/>
+<ref bean="regionDepartPersonnelConverter"/>
+<ref bean="districtSanteDepartPersonnelConverter"/>
+<ref bean="CDTDepartPersonnelConverter"/>
+<ref bean="personnelDepartPersonnelConverter"/>
+<ref bean="regionArriveePersonnelConverter"/>
+<ref bean="districtSanteArriveePersonnelConverter"/>
+<ref bean="CDTArriveePersonnelConverter"/>
+<ref bean="personnelArriveePersonnelConverter"/>
+<ref bean="districtSantesRegionConverter"/>
+<ref bean="regionDistrictSanteConverter"/>
+<ref bean="regionCentreDiagTraitConverter"/>
+<ref bean="districtSanteCentreDiagTraitConverter"/>
+<ref bean="lieuxDitsCentreDiagTraitConverter"/>
+<ref bean="regionLaboratoireReferenceConverter"/>
+<ref bean="districtSanteLaboratoireReferenceConverter"/>
+<ref bean="lieuxDitsLaboratoireReferenceConverter"/>
+<ref bean="prisesMedicamenteusesRegimeConverter"/>
+<ref bean="regimePriseMedicamentRegimeConverter"/>
+<ref bean="medicamentPriseMedicamentRegimeConverter"/>
+<ref bean="candidaturesFormationConverter"/>
+<ref bean="formationCandidatureFormationConverter"/>
+<ref bean="regionCandidatureFormationConverter"/>
+<ref bean="districtSanteCandidatureFormationConverter"/>
+<ref bean="CDTCandidatureFormationConverter"/>
+<ref bean="personnelCandidatureFormationConverter"/>
+<ref bean="audioTTutorielConverter"/>
+<ref bean="videoTTutorielConverter"/>
+<ref bean="textTTutorielConverter"/>
+<ref bean="patientOutBoxConverter"/>
+
+
+			</set>
+		</property>
+		<property name="converters">
+			<set>
+				<ref bean="utcDateConverter" />
+				<ref bean="binaryConverter" />	
+			</set>
+		</property>
+		<property name="omittedProperties">
+			<set>
+				<ref bean="omitUploadDate" />
+				<ref bean="omitVersion" />
+				<ref bean="omitNotificationLocale" />
+				<ref bean="omitNotificationMethod" />
+				<ref bean="omitBeNotified" />
+				<ref bean="omitNotificationData" />
+				<ref bean="omitLastLoginDate" />
+			</set>
+		</property>
+	</bean>
+</beans>

@@ -1,0 +1,676 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 4.2.1.v201209101448 Build &lt;4.2.1.v20120912-1721></property>
+    <simple-property-list name="includeResource">
+			<value>EpicamTranslations</value>
+			<value>EpicamTranslations_fr</value>
+			<value>EpicamTranslations_en</value>
+    </simple-property-list>
+    <property name="units">in</property>
+    <method name="beforeFactory"><![CDATA[
+    	var locale = params["loc"];
+		if(locale!=null) {
+			if(locale=="fr") {
+				reportContext.getDesignHandle().setLocale(Packages.com.ibm.icu.util.ULocale.FRENCH);
+			}
+			else if(locale=="en") {
+				reportContext.getDesignHandle().setLocale(Packages.com.ibm.icu.util.ULocale.ENGLISH);
+			}
+		}
+	]]></method>
+    <property name="iconFile">/templates/simple_listing.gif</property>
+    <property name="cheatSheet">org.eclipse.birt.report.designer.ui.cheatsheet.simplelisting</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <parameters>
+        <scalar-parameter name="loc">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>       
+        <scalar-parameter name="type">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript">new String()</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="objet_francais">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript">new String()</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>	
+        <scalar-parameter name="objet_english">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript">new String()</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>	
+        <scalar-parameter name="message_francais">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript">new String()</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>	
+        <scalar-parameter name="message_english">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript">new String()</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>	
+    </parameters>
+    <data-sources>
+        <script-data-source name="SmsPredefiniHandler"/>
+    </data-sources>
+    <data-sets>
+        <script-data-set name="SmsPredefiniDataSet">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">Id</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">CreationDate</property>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">ModificationDate</property>
+                    <property name="dataType">date-time</property>
+                </structure>                      
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">Type</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">Objet</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">Periodicite</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">DateEnvoyeSMSPonctuel</property>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">Statut</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">Message</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">Reponse1</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
+                    <property name="name">Reponse2</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">12</property>
+                    <property name="name">BonneReponse</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">13</property>
+                    <property name="name">EnvoyerAPartirDe</property>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="position">14</property>
+                    <property name="name">ArreterEnvoyerA</property>
+                    <property name="dataType">date-time</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">Id</property>
+                    <text-property name="displayName" key="field_id"></text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">CreationDate</property>
+                    <text-property name="displayName" key="field_creationDate"></text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">ModificationDate</property>
+                    <text-property name="displayName" key="field_lastModificationDate"></text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Type</property>
+                    <text-property name="displayName" key="smsPredefini_field_type"></text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Objet</property>
+                    <text-property name="displayName" key="smsPredefini_field_objet"></text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Periodicite</property>
+                    <text-property name="displayName" key="smsPredefini_field_periodicite"></text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">DateEnvoyeSMSPonctuel</property>
+                    <text-property name="displayName" key="smsPredefini_field_dateEnvoyeSMSPonctuel"></text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Statut</property>
+                    <text-property name="displayName" key="smsPredefini_field_statut"></text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Message</property>
+                    <text-property name="displayName" key="smsPredefini_field_message"></text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Reponse1</property>
+                    <text-property name="displayName" key="smsPredefini_field_reponse1"></text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Reponse2</property>
+                    <text-property name="displayName" key="smsPredefini_field_reponse2"></text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">BonneReponse</property>
+                    <text-property name="displayName" key="smsPredefini_field_bonneReponse"></text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">EnvoyerAPartirDe</property>
+                    <text-property name="displayName" key="smsPredefini_field_envoyerAPartirDe"></text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">ArreterEnvoyerA</property>
+                    <text-property name="displayName" key="smsPredefini_field_arreterEnvoyerA"></text-property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">Id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">CreationDate</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">ModificationDate</property>
+                        <property name="dataType">date-time</property>
+                    </structure>                
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">Type</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">Objet</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">Periodicite</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">DateEnvoyeSMSPonctuel</property>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">Statut</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">Message</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">Reponse1</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
+                    <property name="name">Reponse2</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">12</property>
+                    <property name="name">BonneReponse</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">13</property>
+                    <property name="name">EnvoyerAPartirDe</property>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="position">14</property>
+                    <property name="name">ArreterEnvoyerA</property>
+                    <property name="dataType">date-time</property>
+                </structure>
+                </list-property>
+            </structure>
+            <method name="beforeOpen"><![CDATA[
+            
+	            count = 0;			
+	
+				// Get instance of Renderer
+				beanRenderer = Packages.org.imogene.epicam.server.EpicamServerRenderer.get();
+				beanRenderer.setLocale(params["loc"]);
+				
+				// Get instance of SmsPredefiniHandler class
+				smsPredefiniHandler = spring.getBean("smsPredefiniHandler");
+								
+				//Load the beans
+				beans =smsPredefiniHandler.listForCsv("modified", false
+		, params["type"]
+		, params["objet_francais"]
+		, params["objet_english"]
+		, params["message_francais"]
+		, params["message_english"]
+						);
+			]]></method>
+			<property name="dataSource">SmsPredefiniHandler</property>
+			<method name="fetch"><![CDATA[
+				if(beans != null) {
+				
+					if(count < beans.size()){
+					
+						var bean = beans.get(count);
+						
+					    row["Id"] = bean.getId();	
+					    row["CreationDate"] = bean.getCreated();
+					    row["ModificationDate"] = bean.getModified();							
+						
+						if (bean.getType() != null)	
+					    	row["Type"] = beanRenderer.getSmsPredefiniEnumDisplayValue("type", bean.getType());
+						if (bean.getObjet() != null)	
+					    	row["Objet"] = beanRenderer.getLocalizedText(bean.getObjet());	
+						if (bean.getPeriodicite() != null)	
+					    	row["Periodicite"] = beanRenderer.getSmsPredefiniEnumDisplayValue("periodicite", bean.getPeriodicite());
+					    row["DateEnvoyeSMSPonctuel"] = bean.getDateEnvoyeSMSPonctuel();
+						if (bean.getStatut() != null)	
+					    	row["Statut"] = beanRenderer.getSmsPredefiniEnumDisplayValue("statut", bean.getStatut());
+						if (bean.getMessage() != null)	
+					    	row["Message"] = beanRenderer.getLocalizedText(bean.getMessage());	
+					    row["Reponse1"] = bean.getReponse1();
+					    row["Reponse2"] = bean.getReponse2();
+					    row["BonneReponse"] = bean.getBonneReponse();
+					    row["EnvoyerAPartirDe"] = bean.getEnvoyerAPartirDe();
+					    row["ArreterEnvoyerA"] = bean.getArreterEnvoyerA();
+    	
+					    count++;
+					    return true;
+					}
+				}
+				return false; 
+	]]></method>
+        </script-data-set>
+    </data-sets>
+    <styles>
+        <style name="report" id="24">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">10pt</property>
+        </style>
+        <style name="crosstab-cell" id="25">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="crosstab" id="26">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="type">a4</property>
+            <property name="orientation">landscape</property>
+            <property name="showHeaderOnFirst">false</property>
+            <property name="showFooterOnLast">false</property>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <table id="171">
+            <property name="dataSet">SmsPredefiniDataSet</property>
+            <list-property name="boundDataColumns">               
+                <structure>
+                    <property name="name">Id</property>
+                    <text-property name="displayName" key="field_id"/>
+                    <expression name="expression" type="javascript">dataSetRow["Id"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>                   
+                    <property name="name">CreationDate</property>
+                    <text-property name="displayName" key="field_creationDate"/>
+                    <expression name="expression" type="javascript">dataSetRow["CreationDate"]</expression>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="name">ModificationDate</property>
+                    <text-property name="displayName" key="field_lastModificationDate"/>
+                    <expression name="expression" type="javascript">dataSetRow["ModificationDate"]</expression>
+                    <property name="dataType">date-time</property>
+                </structure>
+         
+                <structure>
+                    <property name="name">Type</property>
+                    <text-property name="displayName" key="smsPredefini_field_type"/>
+                    <expression name="expression" type="javascript">dataSetRow["Type"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Objet</property>
+                    <text-property name="displayName" key="smsPredefini_field_objet"/>
+                    <expression name="expression" type="javascript">dataSetRow["Objet"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Periodicite</property>
+                    <text-property name="displayName" key="smsPredefini_field_periodicite"/>
+                    <expression name="expression" type="javascript">dataSetRow["Periodicite"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">DateEnvoyeSMSPonctuel</property>
+                    <text-property name="displayName" key="smsPredefini_field_dateEnvoyeSMSPonctuel"/>
+                    <expression name="expression" type="javascript">dataSetRow["DateEnvoyeSMSPonctuel"]</expression>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="name">Statut</property>
+                    <text-property name="displayName" key="smsPredefini_field_statut"/>
+                    <expression name="expression" type="javascript">dataSetRow["Statut"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Message</property>
+                    <text-property name="displayName" key="smsPredefini_field_message"/>
+                    <expression name="expression" type="javascript">dataSetRow["Message"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Reponse1</property>
+                    <text-property name="displayName" key="smsPredefini_field_reponse1"/>
+                    <expression name="expression" type="javascript">dataSetRow["Reponse1"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">Reponse2</property>
+                    <text-property name="displayName" key="smsPredefini_field_reponse2"/>
+                    <expression name="expression" type="javascript">dataSetRow["Reponse2"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">BonneReponse</property>
+                    <text-property name="displayName" key="smsPredefini_field_bonneReponse"/>
+                    <expression name="expression" type="javascript">dataSetRow["BonneReponse"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">EnvoyerAPartirDe</property>
+                    <text-property name="displayName" key="smsPredefini_field_envoyerAPartirDe"/>
+                    <expression name="expression" type="javascript">dataSetRow["EnvoyerAPartirDe"]</expression>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="name">ArreterEnvoyerA</property>
+                    <text-property name="displayName" key="smsPredefini_field_arreterEnvoyerA"/>
+                    <expression name="expression" type="javascript">dataSetRow["ArreterEnvoyerA"]</expression>
+                    <property name="dataType">date-time</property>
+                </structure>
+            </list-property>
+            <column/>
+            <column/>
+            <column/>
+			<column/>
+			<column/>
+			<column/>
+			<column/>
+			<column/>
+			<column/>
+			<column/>
+			<column/>
+			<column/>
+			<column/>
+			<column/>
+            <header>
+                <row>
+                    <cell>
+                        <label>
+                            <text-property name="text" key="field_id"/>
+                        </label>
+                    </cell>                  
+                    <cell>
+                        <label>
+                            <text-property name="text" key="field_creationDate"/>
+                        </label>
+                    </cell>
+                    <cell>
+                        <label>
+                            <text-property name="text" key="field_lastModificationDate"/>
+                        </label>
+                    </cell>             
+                    <cell>
+                        <label>
+                            <text-property name="text" key="smsPredefini_field_type"/>
+                        </label>
+                    </cell>
+                    <cell>
+                        <label>
+                            <text-property name="text" key="smsPredefini_field_objet"/>
+                        </label>
+                    </cell>
+                    <cell>
+                        <label>
+                            <text-property name="text" key="smsPredefini_field_periodicite"/>
+                        </label>
+                    </cell>
+                    <cell>
+                        <label>
+                            <text-property name="text" key="smsPredefini_field_dateEnvoyeSMSPonctuel"/>
+                        </label>
+                    </cell>
+                    <cell>
+                        <label>
+                            <text-property name="text" key="smsPredefini_field_statut"/>
+                        </label>
+                    </cell>
+                    <cell>
+                        <label>
+                            <text-property name="text" key="smsPredefini_field_message"/>
+                        </label>
+                    </cell>
+                    <cell>
+                        <label>
+                            <text-property name="text" key="smsPredefini_field_reponse1"/>
+                        </label>
+                    </cell>
+                    <cell>
+                        <label>
+                            <text-property name="text" key="smsPredefini_field_reponse2"/>
+                        </label>
+                    </cell>
+                    <cell>
+                        <label>
+                            <text-property name="text" key="smsPredefini_field_bonneReponse"/>
+                        </label>
+                    </cell>
+                    <cell>
+                        <label>
+                            <text-property name="text" key="smsPredefini_field_envoyerAPartirDe"/>
+                        </label>
+                    </cell>
+                    <cell>
+                        <label>
+                            <text-property name="text" key="smsPredefini_field_arreterEnvoyerA"/>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row>
+                    <cell>
+                        <data>
+                            <property name="resultSetColumn">Id</property>
+                        </data>
+                    </cell>                 
+                    <cell>
+                        <data>
+                            <property name="resultSetColumn">CreationDate</property>
+                        </data>
+                    </cell>
+                    <cell>
+                        <data>
+                            <property name="resultSetColumn">ModificationDate</property>
+                        </data>
+                    </cell>
+                    <cell>
+                        <data>
+                            <property name="resultSetColumn">Type</property>
+                        </data>
+                    </cell>
+                    <cell>
+                        <data>
+                            <property name="resultSetColumn">Objet</property>
+                        </data>
+                    </cell>
+                    <cell>
+                        <data>
+                            <property name="resultSetColumn">Periodicite</property>
+                        </data>
+                    </cell>
+                    <cell>
+                        <data>
+                            <property name="resultSetColumn">DateEnvoyeSMSPonctuel</property>
+                        </data>
+                    </cell>
+                    <cell>
+                        <data>
+                            <property name="resultSetColumn">Statut</property>
+                        </data>
+                    </cell>
+                    <cell>
+                        <data>
+                            <property name="resultSetColumn">Message</property>
+                        </data>
+                    </cell>
+                    <cell>
+                        <data>
+                            <property name="resultSetColumn">Reponse1</property>
+                        </data>
+                    </cell>
+                    <cell>
+                        <data>
+                            <property name="resultSetColumn">Reponse2</property>
+                        </data>
+                    </cell>
+                    <cell>
+                        <data>
+                            <property name="resultSetColumn">BonneReponse</property>
+                        </data>
+                    </cell>
+                    <cell>
+                        <data>
+                            <property name="resultSetColumn">EnvoyerAPartirDe</property>
+                        </data>
+                    </cell>
+                    <cell>
+                        <data>
+                            <property name="resultSetColumn">ArreterEnvoyerA</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+        </table>
+    </body>
+</report>

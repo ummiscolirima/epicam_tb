@@ -1,0 +1,594 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 4.2.1.v201209101448 Build &lt;4.2.1.v20120912-1721></property>
+    <simple-property-list name="includeResource">
+			<value>EpicamTranslations</value>
+			<value>EpicamTranslations_fr</value>
+			<value>EpicamTranslations_en</value>
+    </simple-property-list>
+    <property name="units">in</property>
+    <method name="beforeFactory"><![CDATA[
+    	var locale = params["loc"];
+		if(locale!=null) {
+			if(locale=="fr") {
+				reportContext.getDesignHandle().setLocale(Packages.com.ibm.icu.util.ULocale.FRENCH);
+			}
+			else if(locale=="en") {
+				reportContext.getDesignHandle().setLocale(Packages.com.ibm.icu.util.ULocale.ENGLISH);
+			}
+		}
+	]]></method>
+    <property name="iconFile">/templates/simple_listing.gif</property>
+    <property name="cheatSheet">org.eclipse.birt.report.designer.ui.cheatsheet.simplelisting</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <parameters>
+        <scalar-parameter name="loc">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>       
+        <scalar-parameter name="ravitaillement_cDTDepart_nom">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript">new String()</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="ravitaillement_dateDepartBefore">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript">new String()</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="ravitaillement_dateDepartAfter">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript">new String()</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="ravitaillement_cDTArrivee_nom">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript">new String()</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="ravitaillement_dateArriveeBefore">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript">new String()</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="ravitaillement_dateArriveeAfter">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript">new String()</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="sortieLot_lot_numero">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript">new String()</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="sortieLot_lot_intrant_identifiant">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript">new String()</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="sortieLot_lot_medicament_designation">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript">new String()</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="sortieLot_lot_quantite">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript">new String()</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="sortieLot_quantite">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript">new String()</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="entreeLot_lot_numero">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript">new String()</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="entreeLot_lot_intrant_identifiant">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript">new String()</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="entreeLot_lot_medicament_designation">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript">new String()</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="entreeLot_lot_quantite">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript">new String()</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="entreeLot_quantite">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="javascript">new String()</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <script-data-source name="DetailRavitaillementHandler"/>
+    </data-sources>
+    <data-sets>
+        <script-data-set name="DetailRavitaillementDataSet">
+            <list-property name="resultSetHints">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">Id</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">CreationDate</property>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">ModificationDate</property>
+                    <property name="dataType">date-time</property>
+                </structure>                      
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">Ravitaillement</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">SortieLot</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">EntreeLot</property>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">Id</property>
+                    <text-property name="displayName" key="field_id"></text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">CreationDate</property>
+                    <text-property name="displayName" key="field_creationDate"></text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">ModificationDate</property>
+                    <text-property name="displayName" key="field_lastModificationDate"></text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">Ravitaillement</property>
+                    <text-property name="displayName" key="detailRavitaillement_field_ravitaillement"></text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">SortieLot</property>
+                    <text-property name="displayName" key="detailRavitaillement_field_sortieLot"></text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">EntreeLot</property>
+                    <text-property name="displayName" key="detailRavitaillement_field_entreeLot"></text-property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">Id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">CreationDate</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">ModificationDate</property>
+                        <property name="dataType">date-time</property>
+                    </structure>                
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">Ravitaillement</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">SortieLot</property>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">EntreeLot</property>
+                    <property name="dataType">string</property>
+                </structure>
+                </list-property>
+            </structure>
+            <method name="beforeOpen"><![CDATA[
+            
+	            count = 0;			
+	
+				// Get instance of Renderer
+				beanRenderer = Packages.org.imogene.epicam.server.EpicamServerRenderer.get();
+				beanRenderer.setLocale(params["loc"]);
+				
+				// Get instance of DetailRavitaillementHandler class
+				detailRavitaillementHandler = spring.getBean("detailRavitaillementHandler");
+								
+				//Load the beans
+				beans =detailRavitaillementHandler.listForCsv("modified", false
+		, params["ravitaillement_cDTDepart_nom"]
+		, params["ravitaillement_dateDepartBefore"]
+		, params["ravitaillement_dateDepartAfter"]
+		, params["ravitaillement_cDTArrivee_nom"]
+		, params["ravitaillement_dateArriveeBefore"]
+		, params["ravitaillement_dateArriveeAfter"]
+		, params["sortieLot_lot_numero"]
+		, params["sortieLot_lot_intrant_identifiant"]
+		, params["sortieLot_lot_medicament_designation"]
+		, params["sortieLot_lot_quantite"]
+		, params["sortieLot_quantite"]
+		, params["entreeLot_lot_numero"]
+		, params["entreeLot_lot_intrant_identifiant"]
+		, params["entreeLot_lot_medicament_designation"]
+		, params["entreeLot_lot_quantite"]
+		, params["entreeLot_quantite"]
+						);
+			]]></method>
+			<property name="dataSource">DetailRavitaillementHandler</property>
+			<method name="fetch"><![CDATA[
+				if(beans != null) {
+				
+					if(count < beans.size()){
+					
+						var bean = beans.get(count);
+						
+					    row["Id"] = bean.getId();	
+					    row["CreationDate"] = bean.getCreated();
+					    row["ModificationDate"] = bean.getModified();							
+						
+						if (bean.getRavitaillement() != null)	
+					    	row["Ravitaillement"] = beanRenderer.getDisplayValue(bean.getRavitaillement());
+						if (bean.getSortieLot() != null)	
+					    	row["SortieLot"] = beanRenderer.getDisplayValue(bean.getSortieLot());
+						if (bean.getEntreeLot() != null)	
+					    	row["EntreeLot"] = beanRenderer.getDisplayValue(bean.getEntreeLot());
+    	
+					    count++;
+					    return true;
+					}
+				}
+				return false; 
+	]]></method>
+        </script-data-set>
+    </data-sets>
+    <styles>
+        <style name="report" id="24">
+            <property name="fontFamily">sans-serif</property>
+            <property name="fontSize">10pt</property>
+        </style>
+        <style name="crosstab-cell" id="25">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+        <style name="crosstab" id="26">
+            <property name="borderBottomColor">#CCCCCC</property>
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">1pt</property>
+            <property name="borderLeftColor">#CCCCCC</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">1pt</property>
+            <property name="borderRightColor">#CCCCCC</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">1pt</property>
+            <property name="borderTopColor">#CCCCCC</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">1pt</property>
+        </style>
+    </styles>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="type">a4</property>
+            <property name="orientation">landscape</property>
+            <property name="showHeaderOnFirst">false</property>
+            <property name="showFooterOnLast">false</property>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <table id="171">
+            <property name="dataSet">DetailRavitaillementDataSet</property>
+            <list-property name="boundDataColumns">               
+                <structure>
+                    <property name="name">Id</property>
+                    <text-property name="displayName" key="field_id"/>
+                    <expression name="expression" type="javascript">dataSetRow["Id"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>                   
+                    <property name="name">CreationDate</property>
+                    <text-property name="displayName" key="field_creationDate"/>
+                    <expression name="expression" type="javascript">dataSetRow["CreationDate"]</expression>
+                    <property name="dataType">date-time</property>
+                </structure>
+                <structure>
+                    <property name="name">ModificationDate</property>
+                    <text-property name="displayName" key="field_lastModificationDate"/>
+                    <expression name="expression" type="javascript">dataSetRow["ModificationDate"]</expression>
+                    <property name="dataType">date-time</property>
+                </structure>
+         
+                <structure>
+                    <property name="name">Ravitaillement</property>
+                    <text-property name="displayName" key="detailRavitaillement_field_ravitaillement"/>
+                    <expression name="expression" type="javascript">dataSetRow["Ravitaillement"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">SortieLot</property>
+                    <text-property name="displayName" key="detailRavitaillement_field_sortieLot"/>
+                    <expression name="expression" type="javascript">dataSetRow["SortieLot"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">EntreeLot</property>
+                    <text-property name="displayName" key="detailRavitaillement_field_entreeLot"/>
+                    <expression name="expression" type="javascript">dataSetRow["EntreeLot"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <column/>
+            <column/>
+            <column/>
+			<column/>
+			<column/>
+			<column/>
+            <header>
+                <row>
+                    <cell>
+                        <label>
+                            <text-property name="text" key="field_id"/>
+                        </label>
+                    </cell>                  
+                    <cell>
+                        <label>
+                            <text-property name="text" key="field_creationDate"/>
+                        </label>
+                    </cell>
+                    <cell>
+                        <label>
+                            <text-property name="text" key="field_lastModificationDate"/>
+                        </label>
+                    </cell>             
+                    <cell>
+                        <label>
+                            <text-property name="text" key="detailRavitaillement_field_ravitaillement"/>
+                        </label>
+                    </cell>
+                    <cell>
+                        <label>
+                            <text-property name="text" key="detailRavitaillement_field_sortieLot"/>
+                        </label>
+                    </cell>
+                    <cell>
+                        <label>
+                            <text-property name="text" key="detailRavitaillement_field_entreeLot"/>
+                        </label>
+                    </cell>
+                </row>
+            </header>
+            <detail>
+                <row>
+                    <cell>
+                        <data>
+                            <property name="resultSetColumn">Id</property>
+                        </data>
+                    </cell>                 
+                    <cell>
+                        <data>
+                            <property name="resultSetColumn">CreationDate</property>
+                        </data>
+                    </cell>
+                    <cell>
+                        <data>
+                            <property name="resultSetColumn">ModificationDate</property>
+                        </data>
+                    </cell>
+                    <cell>
+                        <data>
+                            <property name="resultSetColumn">Ravitaillement</property>
+                        </data>
+                    </cell>
+                    <cell>
+                        <data>
+                            <property name="resultSetColumn">SortieLot</property>
+                        </data>
+                    </cell>
+                    <cell>
+                        <data>
+                            <property name="resultSetColumn">EntreeLot</property>
+                        </data>
+                    </cell>
+                </row>
+            </detail>
+        </table>
+    </body>
+</report>
